@@ -5,7 +5,7 @@ package zzl.leetcode;
  * 输出: 7 -> 0 -> 8
  *
  * @author zzl
- * @link {https://leetcode-cn.com/problems/two-sum/}
+ * @link {https://leetcode-cn.com/problems/add-two-numbers/}
  */
 public class AddTwoNumber {
     public static void main(String[] args) {
