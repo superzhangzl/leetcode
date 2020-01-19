@@ -36,6 +36,7 @@ public class LongestPalindrome {
         System.out.println(longestPalindrome("aabc"));
     }
 
+    // todo 待优化，看到一个和我一样的算法，但是把字符串转成了数组来提高计算速度
     public static String longestPalindrome(String s) {
         if (s == null || s.length() == 0) {
             return "";
