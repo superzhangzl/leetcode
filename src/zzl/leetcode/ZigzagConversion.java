@@ -33,10 +33,34 @@ package zzl.leetcode;
  */
 public class ZigzagConversion {
     public static void main(String[] args) {
-
+        System.out.println(convert("LEETCODEISHIRING", 3));
+        System.out.println(convert("LEETCODEISHIRING", 4));
     }
 
-    public String convert(String s, int numRows) {
+    public static String convert(String s, int numRows) {
+        if (s.length() == 1) {
+            return s;
+        }
+        if (s.length() == 2) {
+        }
+        double length = s.length();
+        int width = (int) (Math.ceil((length / (2.0 * numRows - 2.0))) * (numRows - 1));
+        int height = numRows;
+        print("length: " + length);
+        print("size: (" + width + "," + height + ")");
+        int[][] arr = new int[height][width];
+        // todo 最简单的方法，构造一个矩阵，再重新读取。若字符串长度非常长，浪费很大
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("=================");
         return null;
+    }
+
+    private static void print(Object msg) {
+        System.out.println(msg);
     }
 }
