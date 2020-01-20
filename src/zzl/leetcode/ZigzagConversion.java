@@ -33,34 +33,70 @@ package zzl.leetcode;
  */
 public class ZigzagConversion {
     public static void main(String[] args) {
-        System.out.println(convert("LEETCODEISHIRING", 3));
-        System.out.println(convert("LEETCODEISHIRING", 4));
+//        System.out.println(convert("ABCDEFGHIJKL", 4));
+//        System.out.println(convert("ABCDEFGHIJKL", 2));
+        System.out.println(convert("LEETCODEISHIRING", 3).equals("LCIRETOESIIGEDHN"));
+        System.out.println(convert("LEETCODEISHIRING", 4).equals("LDREOEIIECIHNTSG"));
+        System.out.println(convert("AB", 1).equals("AB"));
+        System.out.println(convert("A", 2).equals("A"));
+        System.out.println(convert("ABC", 2).equals("ACB"));
     }
 
+    /**
+     * 思路：将字符串按照层数划分区间，两个游标从两头向中间移动，每执行一层调整一次游标
+     * 因为区间内取值是中心对称的，到最中间只输出一次即可
+     * 时间复杂度为O(n)，其实略大于O(n)一丢丢，因为要向上取整
+     * <p>
+     * 注：看到一个解题思路是使用一个flag来取反表示中心对称的操作，思路其实是一致的
+     *
+     * @param s
+     * @param numRows
+     * @return
+     */
     public static String convert(String s, int numRows) {
-        if (s.length() == 1) {
+        if (numRows == 1) {
             return s;
         }
-        if (s.length() == 2) {
+        if (s.length() <= numRows) {
+            return s;
         }
-        double length = s.length();
-        int width = (int) (Math.ceil((length / (2.0 * numRows - 2.0))) * (numRows - 1));
-        int height = numRows;
-        print("length: " + length);
-        print("size: (" + width + "," + height + ")");
-        int[][] arr = new int[height][width];
-        // todo 最简单的方法，构造一个矩阵，再重新读取。若字符串长度非常长，浪费很大
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                System.out.print(arr[i][j]);
+        int loopCount = (int) Math.ceil(s.length() / (double) numRows);
+        print("str length: " + s.length());
+        print("loop count: " + loopCount);
+        int leftIndex = 0;
+        int rightIndex = 2 * numRows - 2;
+        char[] result = new char[s.length()];
+        int idx = 0;
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < loopCount; j++) {
+                int left = leftIndex + (2 * numRows - 2) * j;
+                int right = rightIndex + (2 * numRows - 2) * j;
+                print("left offset: " + left + "; right offset: " + right);
+                // left 和right 肯定会相等，因为移动长度为 2 * numRows - 2，一定为偶数
+                if (left == right && left < s.length()) {
+                    char middleChar = s.charAt(left);
+                    print("middleChar:" + middleChar);
+                    result[idx++] = middleChar;
+                    continue;
+                }
+                if (left < s.length()) {
+                    char leftChar = s.charAt(left);
+                    print("leftChar: " + leftChar);
+                    result[idx++] = leftChar;
+                }
+                if (right % (2 * numRows - 2) != 0 && right < s.length()) {
+                    char rightChar = s.charAt(right);
+                    print("rightChar: " + rightChar);
+                    result[idx++] = rightChar;
+                }
             }
-            System.out.println();
+            leftIndex++;
+            rightIndex--;
         }
-        System.out.println("=================");
-        return null;
+        return new String(result);
     }
 
     private static void print(Object msg) {
-        System.out.println(msg);
+//        System.out.println(msg);
     }
 }
