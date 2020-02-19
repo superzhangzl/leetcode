@@ -73,6 +73,7 @@ public class RemoveNthNodeFromEndOfList {
             return head.next;
         }
         ListNode deleteNode = null;
+        // 此处由更好的处理办法，new一个对象，将其next节点设置为head，后续会减少判断条件
         deleteNode = head;
         while (index.next != null) {
             index = index.next;
