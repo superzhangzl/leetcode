@@ -60,6 +60,7 @@ public class Permutations {
         for (int i = 0; i < len; i++) {
             // 使用位运算来判断当前元素是否使用过
             // used右移i位后的位数和1做&操作会得到0/1，0表示未使用过
+            // 此处的时间复杂度还是会对nums遍历，还有一个解法是交换元素的位置，来将uesd的元素放在前面来减少遍历范围
             if (((used >> i) & 1) == 0) {
                 path.addLast(nums[i]);
                 // 进行亦或操作，如果是0就设置为1
