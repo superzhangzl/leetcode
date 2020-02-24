@@ -72,4 +72,23 @@ public class Permutations {
             }
         }
     }
+
+    private void dfsWithSwap(int[] nums, int start, int len, long depth, Deque<Integer> path, List<List<Integer>> res) {
+        if (depth == len) {
+            res.add(new ArrayList<>(path));
+        }
+        for (int i = start; i < len; i++) {
+            path.addLast(nums[i]);
+            swap(nums, start, i);
+            dfsWithSwap(nums, start + 1, len, depth + 1, path, res);
+            swap(nums, start, i);
+            path.removeLast();
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
 }
