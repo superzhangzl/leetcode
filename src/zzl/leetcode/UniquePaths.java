@@ -68,4 +68,21 @@ public class UniquePaths {
         }
         return cur[n - 1];
     }
+
+    /**
+     * 大佬的方法，内存消耗最优解
+     *
+     * @param m
+     * @param n
+     * @return
+     */
+    public int uniquePaths3(int m, int n) {
+        m--;
+        n--;
+        long ans = 1;
+        for (int i = 1; i <= m; i++) {
+            ans = ans * (i + n) / i;
+        }
+        return (int) ans;
+    }
 }
