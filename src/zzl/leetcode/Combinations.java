@@ -40,10 +40,6 @@ public class Combinations {
             return;
         }
         for (int i = start; i < nums.length; i++) {
-            // 剪枝，因为存在交换情况，当前数字小于上一个的时候说明重复了，比如1,2已有，就不需要2,1了，对于2,1的情况就跳过即可
-            if (i > 0 && nums[i] < nums[i - 1] ) {
-                continue;
-            }
             path.addLast(nums[i]);
             swap(nums, start, i);
             // 使用i + 1 不算当前的就不会重复，需要过滤后续的
@@ -51,7 +47,6 @@ public class Combinations {
             swap(nums, start, i);
             path.removeLast();
         }
-        System.out.println();
     }
 
     private void swap(int[] nums, int i, int j) {
