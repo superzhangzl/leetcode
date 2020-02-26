@@ -1,6 +1,5 @@
 package zzl.leetcode;
 
-import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +7,8 @@ import java.util.List;
 /**
  * @author zzl
  * @link {https://leetcode-cn.com/problems/unique-binary-search-trees-ii/}
+ * 参考资料
+ * @link {https://lufficc.com/blog/binary-search-tree}
  */
 public class UniqueBinarySearchTreesII {
     public static void main(String[] args) {
