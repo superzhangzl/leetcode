@@ -38,7 +38,8 @@ public class Permutations {
 
         long used = 0;
         Deque<Integer> path = new ArrayDeque<>(len);
-        dfs(nums, len, 0, path, used, res);
+//        dfs(nums, len, 0, path, used, res);
+        dfsWithSwap(nums, 0, len, 0, path, res);
         return res;
     }
 
@@ -79,6 +80,8 @@ public class Permutations {
         }
         for (int i = start; i < len; i++) {
             path.addLast(nums[i]);
+            // 全排列需要保证每个都使用一遍，而且起始是从start开始，而不是从0开始的
+            // 需要将没使用过的swap交换到后面
             swap(nums, start, i);
             dfsWithSwap(nums, start + 1, len, depth + 1, path, res);
             swap(nums, start, i);

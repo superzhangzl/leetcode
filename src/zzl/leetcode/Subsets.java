@@ -29,17 +29,9 @@ public class Subsets {
         res.add(new ArrayList<>(path));
         for (int i = start; i < nums.length; i++) {
             path.addLast(nums[i]);
-            swap(nums, start, i);
             // 使用i + 1 不算当前的就不会重复，需要过滤后续的
             dfs(nums, i + 1, path, res);
-            swap(nums, start, i);
             path.removeLast();
         }
-    }
-
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
     }
 }
