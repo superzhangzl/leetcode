@@ -44,4 +44,26 @@ public class UniqueBinarySearchTrees {
         }
         return (int) C;
     }
+
+    /**
+     * 这个就是以i为root节点，左子树的所有情况与右子树的情况的笛卡尔积
+     * 可参考 {@link UniqueBinarySearchTreesII} 中双层for循环的情况
+     * 具体的推到过程查看leetcode的链接
+     *
+     * @param n
+     * @return
+     * @link {https://leetcode-cn.com/problems/unique-binary-search-trees/solution/bu-tong-de-er-cha-sou-suo-shu-by-leetcode/}
+     */
+    public int numTrees2(int n) {
+        int[] G = new int[n + 1];
+        G[0] = 1;
+        G[1] = 1;
+        for (int i = 2; i <= n; ++i) {
+            for (int j = 1; j <= i; ++j) {
+                G[i] += G[j - 1] * G[i - j];
+            }
+        }
+        return G[n];
+    }
+
 }
