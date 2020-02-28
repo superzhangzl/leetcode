@@ -27,7 +27,36 @@ public class BinaryTreeLevelOrderTraversal {
         System.out.println(new BinaryTreeLevelOrderTraversal().levelOrder(root));
     }
 
+    List<List<Integer>> result = new ArrayList<>();
+
     public List<List<Integer>> levelOrder(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        BFS(root, 0);
+        return result;
+    }
+
+    private void BFS(TreeNode node, int depth) {
+        // 树的深度和result的size增长一致
+        System.out.println(result.size());
+        System.out.println(depth);
+        if (result.size() <= depth) {
+            result.add(new ArrayList<>());
+        }
+        result.get(depth).add(node.val);
+//        System.out.println(node.val);
+        if (node.left != null) {
+            BFS(node.left, depth + 1);
+        }
+//        System.out.println(node.val);
+        if (node.right != null) {
+            BFS(node.right, depth + 1);
+        }
+//        System.out.println(node.val);
+    }
+
+    public List<List<Integer>> levelOrder1(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
         }
