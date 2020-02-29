@@ -25,7 +25,32 @@ public class FlattenBinaryTreeToLinkedList {
         System.out.println("> " + root);
     }
 
+
+    /**
+     * 后续遍历
+     * 我们依次遍历 6 5 4 3 2 1，然后每遍历一个节点就将当前节点的右指针更新为上一个节点。
+     * <p>
+     * 遍历到 5，把 5 的右指针指向 6。6 <- 5 4 3 2 1。
+     * <p>
+     * 遍历到 4，把 4 的右指针指向 5。6 <- 5 <- 4 3 2 1。
+     *
+     * @param root
+     * @link {https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--26/}
+     */
+    private TreeNode pre = null;
+
     public void flatten(TreeNode root) {
+        if (root == null)
+            return;
+        flatten(root.right);
+        flatten(root.left);
+        // 右子树为临时节点，第一次（即最右子节点）时为null
+        root.right = pre;
+        // 左边不允许有数
+        root.left = null;
+        // pre 指向当前更新好的节点，等到最后一次就是指向的根节点
+        pre = root;
+        System.out.println(root);
     }
 
     /**
