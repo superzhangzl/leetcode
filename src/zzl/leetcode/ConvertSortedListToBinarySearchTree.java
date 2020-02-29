@@ -1,5 +1,8 @@
 package zzl.leetcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author zzl
  * @link {https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/}
@@ -32,9 +35,49 @@ public class ConvertSortedListToBinarySearchTree {
         return head;
     }
 
+    private List<Integer> array = new ArrayList<>();
+
+    public TreeNode sortedListToBST(ListNode head) {
+        generateListNameToArray(head);
+
+        if (array.isEmpty()) {
+            return null;
+        }
+        TreeNode root = listToNode(0, array.size() - 1);
+        return root;
+    }
+
+    private TreeNode listToNode(int start, int end) {
+        System.out.println("start=" + start + ", end=" + end);
+        if (start > end) {
+            return null;
+        }
+        int middleIndex = (end + start) / 2;
+        System.out.println(middleIndex);
+        TreeNode node = new TreeNode(array.get(middleIndex));
+        if (start == end) {
+            return node;
+        }
+        System.out.println(array);
+        node.left = listToNode(start, middleIndex - 1);
+        node.right = listToNode(middleIndex + 1, end);
+        return node;
+    }
+
+    private void generateListNameToArray(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        ListNode index = head;
+        while (index != null) {
+            array.add(index.val);
+            index = index.next;
+        }
+    }
+
 
     private ListNode findMiddleElement(ListNode head) {
-        // The pointer used to disconnect the left half from the mid node.
+        // 用于从中间位置截断
         ListNode prevPtr = null;
         // 每次走一步的指针
         ListNode onceStepPointer = head;
@@ -64,7 +107,7 @@ public class ConvertSortedListToBinarySearchTree {
      * @param head
      * @return
      */
-    public TreeNode sortedListToBST(ListNode head) {
+    public TreeNode sortedListToBST2(ListNode head) {
         if (head == null) {
             return null;
         }
@@ -76,8 +119,8 @@ public class ConvertSortedListToBinarySearchTree {
         }
 
         // Recursively form balanced BSTs using the left and right halves of the original list.
-        middleRoot.left = sortedListToBST(head);
-        middleRoot.right = sortedListToBST(middleElement.next);
+        middleRoot.left = sortedListToBST2(head);
+        middleRoot.right = sortedListToBST2(middleElement.next);
 
         return middleRoot;
     }
