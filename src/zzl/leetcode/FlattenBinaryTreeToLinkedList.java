@@ -1,5 +1,7 @@
 package zzl.leetcode;
 
+import zzl.base.TreeNode;
+
 /**
  * @author zzl
  * @link {https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/}
@@ -90,22 +92,4 @@ public class FlattenBinaryTreeToLinkedList {
         }
     }
 
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-
-        @Override
-        public String toString() {
-            return "{" +
-                    "\"val\":" + val +
-                    ", \"left\":" + left +
-                    ", \"right\":" + right +
-                    '}';
-        }
-    }
 }

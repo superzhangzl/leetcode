@@ -1,5 +1,7 @@
 package zzl.leetcode;
 
+import zzl.base.ListNode;
+
 /**
  * 输入: (2 -> 4 -> 3) + (5 -> 6 -> 4)
  * 输出: 7 -> 0 -> 8
@@ -79,23 +81,6 @@ public class AddTwoNumber {
         }
         // 从第二个节点开始返回
         return result.next;
-    }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-
-        @Override
-        public String toString() {
-            return "ListNode{" +
-                    "val=" + val +
-                    ", next=" + next +
-                    '}';
-        }
     }
 }
 

@@ -1,5 +1,8 @@
 package zzl.leetcode;
 
+import zzl.base.ListNode;
+import zzl.base.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,41 +126,5 @@ public class ConvertSortedListToBinarySearchTree {
         middleRoot.right = sortedListToBST2(middleElement.next);
 
         return middleRoot;
-    }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-
-        @Override
-        public String toString() {
-            return "{" +
-                    "val=" + val +
-                    ", next=" + next +
-                    '}';
-        }
-    }
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-
-        @Override
-        public String toString() {
-            return "{" +
-                    "val=" + val +
-                    ", left=" + left +
-                    ", right=" + right +
-                    '}';
-        }
     }
 }

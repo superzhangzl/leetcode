@@ -1,5 +1,7 @@
 package zzl.leetcode;
 
+import zzl.base.TreeNode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,23 +76,5 @@ public class UniqueBinarySearchTreesII {
      * @link {https://leetcode-cn.com/problems/unique-binary-search-trees-ii/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-2-7/}
      */
 
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-
-        @Override
-        public String toString() {
-            return "{" +
-                    "val=" + val +
-                    ", left=" + left +
-                    ", right=" + right +
-                    '}';
-        }
-    }
 }
 
