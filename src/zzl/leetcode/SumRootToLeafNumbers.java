@@ -31,7 +31,6 @@ public class SumRootToLeafNumbers {
         Assert.assertEquals(new SumRootToLeafNumbers().sumNumbers(root), 1026);
     }
 
-    private List<Integer> result = new ArrayList<>();
 
     /**
      * 这种传统解法的时间和内存消耗都比较高
@@ -43,8 +42,10 @@ public class SumRootToLeafNumbers {
      */
     public int sumNumbers(TreeNode root) {
         dfs(root, new StringBuilder());
-        return result.stream().mapToInt(Integer::intValue).sum();
+        return result;
     }
+
+    private int result = 0;
 
     private void dfs(TreeNode root, StringBuilder stack) {
         if (root == null) {
@@ -57,7 +58,7 @@ public class SumRootToLeafNumbers {
             dfs(root.right, stack);
         } else {
             // 打印由前序遍历的来的，所有的root节点到叶子节点的路径
-            result.add(Integer.parseInt(stack.toString()));
+            result += Integer.parseInt(stack.toString());
         }
         stack.deleteCharAt(stack.length() - 1);
     }
