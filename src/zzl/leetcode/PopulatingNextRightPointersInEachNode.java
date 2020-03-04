@@ -26,7 +26,7 @@ public class PopulatingNextRightPointersInEachNode {
         root.left = node2;
         root.right = node3;
         PrintTreeUtil.printNode(root);
-        Node connect = new PopulatingNextRightPointersInEachNode().connect1(root);
+        Node connect = new PopulatingNextRightPointersInEachNode().connect(root);
         System.out.println(connect);
     }
 
@@ -34,36 +34,33 @@ public class PopulatingNextRightPointersInEachNode {
         if (root == null) {
             return null;
         }
-        List<List<Node>> stack = new LinkedList<>();
+        List<Node> stack = new LinkedList<>();
         print(root, 0, stack);
         System.out.println(stack);
-        for (List<Node> list : stack) {
-            for (int i = 0; i < list.size() - 1; i++) {
-                list.get(i).next = list.get(i + 1);
-            }
-        }
         return root;
     }
 
     /**
-     * 使用stack保存每一个层级的所有节点，添加完后，横向连接过去就行，空间复杂度为O(n)
-     * 时间复杂度貌似效率不高，但是胜在好理解一些
+     * 优化，每一层只保存最右且没有next过的节点，然后连接在当前的root节点后，把当前的root设置为该层级的位置
+     * 空间复杂度为O(层数)
      *
      * @param root
      * @param level
      * @param path
      */
-    private void print(Node root, int level, List<List<Node>> path) {
+    private void print(Node root, int level, List<Node> path) {
         if (root == null) {
             return;
         }
         System.out.print(root.val + " ");
         if (path.size() > level && path.get(level) != null) {
-            path.get(level).add(root);
+            // 建立连接
+            path.get(level).next = root;
+            // 更新当前层级节点
+            path.set(level, root);
         } else {
-            path.add(new LinkedList<Node>() {{
-                add(root);
-            }});
+            // 第一次就添加
+            path.add(level, root);
         }
         print(root.left, level + 1, path);
         print(root.right, level + 1, path);
