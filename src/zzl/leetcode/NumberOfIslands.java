@@ -2,6 +2,9 @@ package zzl.leetcode;
 
 import org.junit.Assert;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 岛屿数量
  *
@@ -34,11 +37,49 @@ public class NumberOfIslands {
                 // 如果遇到一个1，则从这个位置开始DFS
                 if (grid[i][j] == '1') {
                     gridCount++;
-                    dfs(grid, i, j);
+                    bfs(grid, i, j);
                 }
             }
         }
         return gridCount;
+    }
+
+    /**
+     * 使用队列进行广度优先遍历，思路和DFS一样
+     *
+     * @param grid
+     * @param i
+     * @param j
+     * @link {https://leetcode-cn.com/problems/number-of-islands/solution/dao-yu-shu-liang-by-leetcode/}
+     */
+    private void bfs(char[][] grid, int i, int j) {
+        int nr = grid.length;
+        int nc = grid[0].length;
+        grid[i][j] = '0'; // mark as visited
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(i * nc + j);
+        while (!queue.isEmpty()) {
+            int id = queue.remove();
+            int row = id / nc;
+            int col = id % nc;
+            if (row - 1 >= 0 && grid[row - 1][col] == '1') {
+                queue.add((row - 1) * nc + col);
+                grid[row - 1][col] = '0';
+            }
+            if (row + 1 < nr && grid[row + 1][col] == '1') {
+                queue.add((row + 1) * nc + col);
+                grid[row + 1][col] = '0';
+            }
+            if (col - 1 >= 0 && grid[row][col - 1] == '1') {
+                queue.add(row * nc + col - 1);
+                grid[row][col - 1] = '0';
+            }
+            if (col + 1 < nc && grid[row][col + 1] == '1') {
+                queue.add(row * nc + col + 1);
+                grid[row][col + 1] = '0';
+            }
+        }
+
     }
 
     private void dfs(char[][] grid, int i, int j) {
