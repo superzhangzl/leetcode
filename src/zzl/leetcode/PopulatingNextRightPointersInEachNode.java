@@ -8,11 +8,13 @@ import java.util.List;
 
 /**
  * 填充每个节点的下一个右侧节点指针
+ * 完美二叉树
  * 提示：
  * - 你只能使用常量级额外空间。
  * - 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。
  *
  * @author zzl
+ * @link {https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/}
  */
 public class PopulatingNextRightPointersInEachNode {
     public static void main(String[] args) {
