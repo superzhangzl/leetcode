@@ -1,5 +1,6 @@
 package zzl.util;
 
+import zzl.base.Node;
 import zzl.base.TreeNode;
 
 /**
@@ -13,5 +14,14 @@ public class PrintTreeUtil {
         printer.setTspace(4);
         printer.setSquareBranches(false);
         printer.printTree(root);
+    }
+
+    static TreePrinter<Node> nodePrinter = new TreePrinter<>(n -> ("" + n.getVal()), n -> n.getLeft(), n -> n.getRight());
+
+    public static void printNode(Node root) {
+        nodePrinter.setHspace(4);
+        nodePrinter.setTspace(4);
+        nodePrinter.setSquareBranches(false);
+        nodePrinter.printTree(root);
     }
 }
