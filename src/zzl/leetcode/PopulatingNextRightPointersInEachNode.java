@@ -26,7 +26,7 @@ public class PopulatingNextRightPointersInEachNode {
         root.left = node2;
         root.right = node3;
         PrintTreeUtil.printNode(root);
-        Node connect = new PopulatingNextRightPointersInEachNode().connect(root);
+        Node connect = new PopulatingNextRightPointersInEachNode().connect1(root);
         System.out.println(connect);
     }
 
@@ -67,5 +67,45 @@ public class PopulatingNextRightPointersInEachNode {
         }
         print(root.left, level + 1, path);
         print(root.right, level + 1, path);
+    }
+
+    /**
+     * leetcode 提交记录上用时最短的解法
+     *
+     * @param root
+     * @return
+     */
+    public Node connectBest(Node root) {
+        if (root == null || root.left == null) {
+            return root;
+        }
+        // 利用已经建立好的next节点
+        Node leftmost = root;
+        // leftmost不为null，该层有数据
+        while (leftmost.left != null) {
+            Node head = leftmost;
+            while (head != null) {
+                head.left.next = head.right;
+                if (head.next != null) {
+                    head.right.next = head.next.left;
+                }
+                head = head.next;
+            }
+            leftmost = leftmost.left;
+        }
+        return root;
+    }
+
+    public Node connect1(Node root) {
+        if (root == null) {
+            return root;
+        }
+        if (root.right != null)
+            root.left.next = root.right;
+        if (root.left != null)
+            root.right.next = root.next != null ? root.next.left : null;
+        connect1(root.left);
+        connect1(root.right);
+        return root;
     }
 }
