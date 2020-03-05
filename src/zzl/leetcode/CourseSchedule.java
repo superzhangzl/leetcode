@@ -22,6 +22,7 @@ public class CourseSchedule {
     }
 
     /**
+     * BFS
      * 1. 统计课程安排图中每个节点的入度，生成 入度表 indegrees。
      * 2. 借助一个队列 queue，将所有入度为 0 的节点入队。
      * 3. 当 queue 非空时，依次将队首节点出队，在课程安排图中删除此节点 pre：
