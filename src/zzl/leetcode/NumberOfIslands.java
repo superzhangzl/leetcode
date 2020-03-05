@@ -173,7 +173,7 @@ public class NumberOfIslands {
                 // 如果遇到一个1，则从这个位置开始DFS
                 if (grid[i][j] == '1') {
                     gridCount++;
-                    bfs(grid, i, j);
+                    dfs(grid, i, j);
                 }
             }
         }
