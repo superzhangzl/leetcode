@@ -26,15 +26,14 @@ public class HouseRobber {
         }
         // 状态转移方程： f(x) = max(f(x-2) + [x], f(x-1))
         // f(-1) = f(0) = 0
-        int[] dp = new int[nums.length];
-        dp[0] = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            if (i - 2 < 0) {
-                dp[i] = Integer.max(0 + nums[i], dp[i - 1]);
-            } else {
-                dp[i] = Integer.max(dp[i - 2] + nums[i], dp[i - 1]);
-            }
+        int f_x_2 = 0;
+        int f_x_1 = 0;
+        for (int i = 0; i < nums.length; i++) {
+            // 当前的f_x_1就是下一次的f_x_2
+            int temp = f_x_1;
+            f_x_1 = Integer.max(f_x_2 + nums[i], f_x_1);
+            f_x_2 = temp;
         }
-        return dp[dp.length - 1];
+        return f_x_1;
     }
 }
