@@ -1,6 +1,6 @@
 package zzl.util;
 
-import zzl.base.Node;
+import zzl.base.BinaryNode;
 import zzl.base.TreeNode;
 
 /**
@@ -16,9 +16,9 @@ public class PrintConsoleUtil {
         printer.printTree(root);
     }
 
-    static TreePrinter<Node> nodePrinter = new TreePrinter<>(n -> ("" + n.getVal()), n -> n.getLeft(), n -> n.getRight());
+    static TreePrinter<BinaryNode> nodePrinter = new TreePrinter<>(n -> ("" + n.getVal()), n -> n.getLeft(), n -> n.getRight());
 
-    public static void printNode(Node root) {
+    public static void printNode(BinaryNode root) {
         nodePrinter.setHspace(4);
         nodePrinter.setTspace(4);
         nodePrinter.setSquareBranches(false);

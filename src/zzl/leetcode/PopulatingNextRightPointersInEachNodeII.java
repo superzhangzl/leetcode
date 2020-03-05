@@ -1,6 +1,6 @@
 package zzl.leetcode;
 
-import zzl.base.Node;
+import zzl.base.BinaryNode;
 import zzl.util.PrintConsoleUtil;
 
 import java.util.LinkedList;
@@ -14,24 +14,24 @@ import java.util.List;
  */
 public class PopulatingNextRightPointersInEachNodeII {
     public static void main(String[] args) {
-        Node root = new Node(1);
-        Node node2 = new Node(2);
-        Node node3 = new Node(3);
-        node2.left = new Node(4);
-        node2.right = new Node(5);
-        node3.right = new Node(7);
-        root.left = node2;
-        root.right = node3;
+        BinaryNode root = new BinaryNode(1);
+        BinaryNode binaryNode2 = new BinaryNode(2);
+        BinaryNode binaryNode3 = new BinaryNode(3);
+        binaryNode2.left = new BinaryNode(4);
+        binaryNode2.right = new BinaryNode(5);
+        binaryNode3.right = new BinaryNode(7);
+        root.left = binaryNode2;
+        root.right = binaryNode3;
         PrintConsoleUtil.printNode(root);
-        Node connect = new PopulatingNextRightPointersInEachNodeII().connect(root);
+        BinaryNode connect = new PopulatingNextRightPointersInEachNodeII().connect(root);
         System.out.println(connect);
     }
 
-    public Node connect(Node root) {
+    public BinaryNode connect(BinaryNode root) {
         if (root == null) {
             return null;
         }
-        List<Node> stack = new LinkedList<>();
+        List<BinaryNode> stack = new LinkedList<>();
         print(root, 0, stack);
         System.out.println(stack);
         return root;
@@ -45,7 +45,7 @@ public class PopulatingNextRightPointersInEachNodeII {
      * @param level
      * @param path
      */
-    private void print(Node root, int level, List<Node> path) {
+    private void print(BinaryNode root, int level, List<BinaryNode> path) {
         if (root == null) {
             return;
         }
