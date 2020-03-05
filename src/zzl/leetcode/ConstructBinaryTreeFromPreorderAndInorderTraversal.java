@@ -1,7 +1,7 @@
 package zzl.leetcode;
 
 import zzl.base.TreeNode;
-import zzl.util.PrintTreeUtil;
+import zzl.util.PrintConsoleUtil;
 
 /**
  * 从前序与中序遍历序列构造二叉树
@@ -16,16 +16,16 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
         int[] preorder = new int[]{1, 2, 3};
         int[] inorder = new int[]{3, 2, 1};
         TreeNode treeNode = new ConstructBinaryTreeFromPreorderAndInorderTraversal().buildTree(preorder, inorder);
-        PrintTreeUtil.print(treeNode);
+        PrintConsoleUtil.printTreeNode(treeNode);
         System.out.println("+=====================");
         preorder = new int[]{3, 9, 20, 15, 7};
         inorder = new int[]{9, 3, 15, 20, 7};
         treeNode = new ConstructBinaryTreeFromPreorderAndInorderTraversal().buildTree(preorder, inorder);
-        PrintTreeUtil.print(treeNode);
+        PrintConsoleUtil.printTreeNode(treeNode);
         preorder = new int[]{3};
         inorder = new int[]{3};
         treeNode = new ConstructBinaryTreeFromPreorderAndInorderTraversal().buildTree(preorder, inorder);
-        PrintTreeUtil.print(treeNode);
+        PrintConsoleUtil.printTreeNode(treeNode);
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {

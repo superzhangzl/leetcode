@@ -1,7 +1,7 @@
 package zzl.leetcode;
 
 import zzl.base.TreeNode;
-import zzl.util.PrintTreeUtil;
+import zzl.util.PrintConsoleUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,7 +24,7 @@ public class BinaryTreeRightSideView {
         node3.right = new TreeNode(7);
         root.left = node2;
         root.right = node3;
-        PrintTreeUtil.print(root);
+        PrintConsoleUtil.printTreeNode(root);
         System.out.println(new BinaryTreeRightSideView().rightSideView(root));
     }
 

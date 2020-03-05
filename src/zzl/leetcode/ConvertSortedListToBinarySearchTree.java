@@ -2,7 +2,7 @@ package zzl.leetcode;
 
 import zzl.base.ListNode;
 import zzl.base.TreeNode;
-import zzl.util.PrintTreeUtil;
+import zzl.util.PrintConsoleUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class ConvertSortedListToBinarySearchTree {
         linkedNode = generate(new int[]{-10, -3, 0, 5, 9});
         System.out.println(new ConvertSortedListToBinarySearchTree().sortedListToBST(linkedNode));
         TreeNode treeNode = new ConvertSortedListToBinarySearchTree().sortedListToBST(linkedNode);
-        PrintTreeUtil.print(treeNode);
+        PrintConsoleUtil.printTreeNode(treeNode);
 
 //        linkedNode = generate(new int[]{-10, -3, 0, 5, 9, 10});
 //        System.out.println(new ConvertSortedListToBinarySearchTree().sortedListToBST(linkedNode));

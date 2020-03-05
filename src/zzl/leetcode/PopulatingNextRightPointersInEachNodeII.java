@@ -1,7 +1,7 @@
 package zzl.leetcode;
 
 import zzl.base.Node;
-import zzl.util.PrintTreeUtil;
+import zzl.util.PrintConsoleUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class PopulatingNextRightPointersInEachNodeII {
         node3.right = new Node(7);
         root.left = node2;
         root.right = node3;
-        PrintTreeUtil.printNode(root);
+        PrintConsoleUtil.printNode(root);
         Node connect = new PopulatingNextRightPointersInEachNodeII().connect(root);
         System.out.println(connect);
     }

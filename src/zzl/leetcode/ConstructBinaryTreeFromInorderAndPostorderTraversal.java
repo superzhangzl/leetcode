@@ -1,7 +1,7 @@
 package zzl.leetcode;
 
 import zzl.base.TreeNode;
-import zzl.util.PrintTreeUtil;
+import zzl.util.PrintConsoleUtil;
 
 /**
  * @author zzl
@@ -14,17 +14,17 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
         int[] inorder = new int[]{9, 3, 15, 20, 7};
         int[] postorder = new int[]{9, 15, 7, 20, 3};
         TreeNode treeNode = new ConstructBinaryTreeFromInorderAndPostorderTraversal().buildTree(inorder, postorder);
-        PrintTreeUtil.print(treeNode);
+        PrintConsoleUtil.printTreeNode(treeNode);
         System.out.println("+=====================");
         inorder = new int[]{3};
         postorder = new int[]{3};
         treeNode = new ConstructBinaryTreeFromInorderAndPostorderTraversal().buildTree(inorder, postorder);
-        PrintTreeUtil.print(treeNode);
+        PrintConsoleUtil.printTreeNode(treeNode);
         System.out.println("+=====================");
         inorder = new int[]{1, 2, 3};
         postorder = new int[]{2, 3, 1};
         treeNode = new ConstructBinaryTreeFromInorderAndPostorderTraversal().buildTree(inorder, postorder);
-        PrintTreeUtil.print(treeNode);
+        PrintConsoleUtil.printTreeNode(treeNode);
     }
 
     public TreeNode buildTree(int[] inorder, int[] postorder) {

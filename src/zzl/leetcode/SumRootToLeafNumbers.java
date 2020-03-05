@@ -2,11 +2,7 @@ package zzl.leetcode;
 
 import org.junit.Assert;
 import zzl.base.TreeNode;
-import zzl.util.PrintTreeUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import zzl.util.PrintConsoleUtil;
 
 /**
  * @author zzl
@@ -18,7 +14,7 @@ public class SumRootToLeafNumbers {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
         root.right = new TreeNode(3);
-        PrintTreeUtil.print(root);
+        PrintConsoleUtil.printTreeNode(root);
         Assert.assertEquals(new SumRootToLeafNumbers().sumNumbers(root), 25);
         // [4,9,0,5,1]
         root = new TreeNode(4);
@@ -27,7 +23,7 @@ public class SumRootToLeafNumbers {
         node9.right = new TreeNode(1);
         root.right = new TreeNode(0);
         root.left = node9;
-        PrintTreeUtil.print(root);
+        PrintConsoleUtil.printTreeNode(root);
         Assert.assertEquals(new SumRootToLeafNumbers().sumNumbers(root), 1026);
     }
 
