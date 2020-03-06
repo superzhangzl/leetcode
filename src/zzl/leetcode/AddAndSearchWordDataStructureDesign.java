@@ -29,6 +29,7 @@ public class AddAndSearchWordDataStructureDesign {
     }
 
     public static class WordDictionary {
+        // 按照起始位置的字符分配大小
         Node[] dictionary = new Node[26];
 
         /**
@@ -61,12 +62,15 @@ public class AddAndSearchWordDataStructureDesign {
                     next = new Node[26];
                     node.next = next;
                 }
+                // 如果当前节点不存在，就新建
+                // 如果存在就续上
                 if (next[character - 'a'] == null) {
                     Node newNode = new Node(character);
                     next[character - 'a'] = newNode;
                 }
                 node = next[character - 'a'];
             }
+            // 设置该单词的最后一个节点为true
             node.isEnd = true;
         }
 
@@ -108,16 +112,19 @@ public class AddAndSearchWordDataStructureDesign {
                 return false;
             }
             if (next == charArray.length - 1) {
+                // 按照前缀匹配，需要判断当前节点为止是否是一个新加的单词
                 if (node.isEnd) {
                     return true;
                 } else {
                     return false;
                 }
             }
+            // 如果下一个节点为null了，就不要再往下搜索了，肯定是false
+            // 即要搜索的比当前字典里的长
+            if (node.next == null) {
+                return false;
+            }
             if (charArray[next + 1] == '.') {
-                if (node.next == null) {
-                    return false;
-                }
                 boolean b = false;
                 for (Node son : node.next) {
                     b = depthSearch(charArray, next + 1, son);
@@ -127,9 +134,6 @@ public class AddAndSearchWordDataStructureDesign {
                 }
                 return b;
             } else {
-                if (node.next == null) {
-                    return false;
-                }
                 return depthSearch(charArray, next + 1, node.next[charArray[next + 1] - 'a']);
             }
         }
@@ -138,8 +142,11 @@ public class AddAndSearchWordDataStructureDesign {
     }
 
     private static class Node {
+        // 当前节点的字符
         public char val;
+        // 到当前节点为止，是否是一个新加的单词
         public boolean isEnd = false;
+        // 与这个节点相连的字符集，eg:ab,ac  a ->[b,c]
         public Node[] next;
 
         public Node(char x) {
