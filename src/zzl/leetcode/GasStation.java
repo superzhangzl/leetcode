@@ -75,7 +75,6 @@ public class GasStation {
                 capacity += gas[index];
                 // 满足条件就执行，不满足就跳出当前循环
                 if (capacity < cost[index]) {
-                    i = index + 1;
                     break;
                 } else {
                     capacity -= cost[index];
