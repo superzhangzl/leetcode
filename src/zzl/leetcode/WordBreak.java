@@ -3,7 +3,9 @@ package zzl.leetcode;
 import org.junit.Assert;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 单词拆分
@@ -15,18 +17,22 @@ import java.util.List;
 public class WordBreak {
     public static void main(String[] args) {
         //  s = "leetcode", wordDict = ["leet", "code"]
-        String word = "leetcode";
+        String word = "leetleetcode";
         List<String> wordDict = Arrays.asList("leet", "code");
-        Assert.assertEquals(new WordBreak().wordBreak(word, wordDict), true);
+        Assert.assertEquals(new WordBreak().wordBreakBfs(word, wordDict), true);
         System.out.println("==================");
         word = "applepenapple";
         wordDict = Arrays.asList("apple", "pen");
-        Assert.assertEquals(new WordBreak().wordBreak(word, wordDict), true);
+        Assert.assertEquals(new WordBreak().wordBreakBfs(word, wordDict), true);
         System.out.println("==================");
 
         word = "catsandog";
         wordDict = Arrays.asList("cats", "dog", "sand", "and", "cat");
-        Assert.assertEquals(new WordBreak().wordBreak(word, wordDict), false);
+        Assert.assertEquals(new WordBreak().wordBreakBfs(word, wordDict), false);
+        System.out.println("==================");
+        word = "aaaaaaa";
+        wordDict = Arrays.asList("aaaa", "aaa");
+        Assert.assertEquals(new WordBreak().wordBreakBfs(word, wordDict), false);
 
     }
 
@@ -65,5 +71,31 @@ public class WordBreak {
             }
         }
         return memory[start] = false;
+    }
+
+    public boolean wordBreakBfs(String s, List<String> wordDict) {
+        //另一个方法是使用宽度优先搜索。将字符串可视化成一棵树，每一个节点是用 endend 为结尾的前缀字符串。当两个节点之间的所有节点都对应了字典中一个有效字符串时，两个节点可以被连接。
+        int length = s.length();
+        Queue<Integer> queue = new LinkedList();
+        queue.add(0);
+        int[] visited = new int[length];
+        while (!queue.isEmpty()) {
+            Integer start = queue.poll();
+            if (visited[start] == 0) {
+                for (int i = start + 1; i <= length; i++) {
+                    String substring = s.substring(start, i);
+                    System.out.println(substring);
+                    if (wordDict.contains(substring)) {
+                        queue.add(i);
+                        if (i == length) {
+                            return true;
+                        }
+                        break;
+                    }
+                }
+            }
+            visited[start] = 1;
+        }
+        return false;
     }
 }
