@@ -55,6 +55,11 @@ public class RestoreIpAddresses {
             if (i - start > 3 || Integer.parseInt(point) > 255 || (point.length() >= 2 && point.charAt(0) == '0')) {
                 continue;
             }
+            // 优化一下，当剩余的子串数大于最大可添加的长度，那肯定连接不完的，直接跳过即可
+            int least = 4 - addresses.size();
+            if (s.length() - i > least * 3) {
+                continue;
+            }
             addresses.push(point);
             dfs(s, i, depth + 1, addresses);
             addresses.pop();
