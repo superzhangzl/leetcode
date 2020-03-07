@@ -15,7 +15,7 @@ public class MaximalSquare {
                 "1 0 1 1 1\n" +
                 "1 1 1 1 1\n" +
                 "1 0 0 1 0";
-        char[][] matrix = GenerateUtil.generateBinaryCharArray(input);
+        char[][] matrix = GenerateUtil.generateBinaryCharArray(input," ");
         Assert.assertEquals(new MaximalSquare().maximalSquare(matrix), 4);
         Assert.assertEquals(new MaximalSquare().maximalSquare(new char[][]{{}}), 0);
         Assert.assertEquals(new MaximalSquare().maximalSquare(new char[][]{{1}}), 1);
