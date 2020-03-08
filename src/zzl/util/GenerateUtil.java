@@ -12,7 +12,7 @@ public class GenerateUtil {
         for (int i = 0; i < height; i++) {
             String[] number = split[i].split(splitChar);
             for (int j = 0; j < width; j++) {
-                result[i][j] = Integer.parseInt(number[j]);
+                result[i][j] = Integer.parseInt(number[j].trim());
             }
         }
         return result;
