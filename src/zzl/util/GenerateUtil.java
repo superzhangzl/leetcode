@@ -4,6 +4,16 @@ package zzl.util;
  * @author zzl
  */
 public class GenerateUtil {
+    public static int[] generateIntArray(String input, String splitChar) {
+        String[] split = input.split(splitChar);
+        int length = split.length;
+        int[] result = new int[length];
+        for (int i = 0; i < length; i++) {
+            result[i] = Integer.parseInt(split[i]);
+        }
+        return result;
+    }
+
     public static int[][] generateBinaryIntArray(String input, String splitChar) {
         String[] split = input.split("\n");
         int height = split.length;
