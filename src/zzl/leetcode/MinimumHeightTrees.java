@@ -38,6 +38,78 @@ public class MinimumHeightTrees {
     Map<Integer, ArrayList<Integer>> map = new HashMap<>();
     Map<Integer, Integer> rootWithMinHeight = new HashMap<>();
 
+
+    /**
+     * 不断地删除它的叶子节点（度为1）那么最后剩下的1或2（最长链长度为偶数时）个节点就是所求答案。
+     *
+     * @param n
+     * @param edges
+     * @return
+     * @link {https://blog.csdn.net/qq_32142535/article/details/78120352}
+     */
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+        if (n == 0) {
+            return Collections.emptyList();
+        }
+        if (n == 1) {
+            return Arrays.asList(0);
+        }
+        if (n == 2) {
+            return Arrays.asList(0, 1);
+        }
+        Map<Integer, ArrayList<Integer>> map = new HashMap<>();
+        for (int i = 0; i < edges.length; i++) {
+            int node1 = edges[i][0];
+            int node2 = edges[i][1];
+            if (map.containsKey(node1)) {
+                map.get(node1).add(node2);
+            } else {
+                ArrayList<Integer> set = new ArrayList<>();
+                set.add(node2);
+                map.put(node1, set);
+            }
+            if (map.containsKey(node2)) {
+                map.get(node2).add(node1);
+            } else {
+                ArrayList<Integer> set = new ArrayList<>();
+                set.add(node1);
+                map.put(node2, set);
+            }
+        }
+        // 构造所有的点与其他点相连的集合
+        System.out.println(map);
+        Queue<Integer> leaves = new LinkedList<>();
+        Queue<Integer> newLeaves = new LinkedList<>();
+        // 将入度为1的点（代表叶子节点）放入队列
+        for (Map.Entry<Integer, ArrayList<Integer>> entry : map.entrySet()) {
+            if (entry.getValue().size() == 1)
+                leaves.add(entry.getKey());
+        }
+        // 结果只能是1或者2
+        while (map.size() > 2 || (map.size() == 2 && leaves.size() != 2)) {
+            // 弹出一个值
+            int leaf = leaves.poll();
+            // 从集合中获取到该叶子节点相连的节点的一个值（入度为1）
+            int neighbor = map.get(leaf).get(0);
+            // 断开与邻居节点的连接，即将邻居节点中连接的list删除他
+            map.get(neighbor).remove(Integer.valueOf(leaf));
+            // 如果邻居节点变成1了，即他的入度为1，他又变成叶子节点了
+            if (map.get(neighbor).size() == 1)
+                // 将他添加进下一轮的操作队列中
+                newLeaves.add(neighbor);
+            // 从map中移出开始弹出的节点，他已经被干掉了
+            map.remove(leaf);
+            // 如果第一轮清空叶子节点行动已完成，再进行下一轮清理计划！
+            if (leaves.isEmpty()) {
+                leaves = newLeaves;
+                newLeaves = new LinkedList<>();
+            }
+            System.out.println(">>>" + map);
+        }
+        System.out.println(map);
+        return map.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toList());
+    }
+
     /**
      * 不合理的算法，暴力dfs，会超时！！！
      *
@@ -45,7 +117,7 @@ public class MinimumHeightTrees {
      * @param edges
      * @return
      */
-    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+    public List<Integer> findMinHeightTreesStupid(int n, int[][] edges) {
         if (n == 0) {
             return Collections.emptyList();
         }
@@ -152,27 +224,26 @@ public class MinimumHeightTrees {
                 map.put(node2, set);
             }
         }
-        System.out.println(map);
-        List<Integer> visited = new LinkedList<>();
+        Queue<Integer> leaves = new LinkedList<>();
+        Queue<Integer> newLeaves = new LinkedList<>();
         for (Map.Entry<Integer, ArrayList<Integer>> entry : map.entrySet()) {
-            if (entry.getValue().size() == 1 && !visited.contains(entry.getKey())) {
-                System.out.println(entry.getKey() + ">" + map);
-                Integer node = entry.getValue().get(0);
-                visited.add(node);
-                if (map.get(node).size() > 1 && map.get(node).contains(entry.getKey())) {
-                    map.get(node).remove(entry.getKey());
-                }
+            if (entry.getValue().size() == 1)
+                leaves.add(entry.getKey());
+        }
+        while (map.size() > 2 || (map.size() == 2 && leaves.size() != 2)) {
+            int leaf = leaves.poll();
+            int neighbor = map.get(leaf).get(0);
+            map.get(neighbor).remove(leaf);
+            if (map.get(neighbor).size() == 1)
+                newLeaves.add(neighbor);
+            map.remove(leaf);
+
+            if (leaves.isEmpty()) {
+                leaves = newLeaves;
+                newLeaves = new LinkedList<>();
             }
         }
         System.out.println(map);
-        Set<Integer> result = new HashSet<>();
-        for (Map.Entry<Integer, ArrayList<Integer>> entry : map.entrySet()) {
-            if (entry.getValue().size() != 0 && !map.get(entry.getValue().get(0)).contains(entry.getKey())) {
-                result.add(entry.getValue().get(0));
-            }
-        }
-        System.out.println(result);
-        System.out.println();
-        return new ArrayList<>(result);
+        return new ArrayList<>();
     }
 }
