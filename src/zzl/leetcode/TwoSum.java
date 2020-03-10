@@ -25,6 +25,27 @@ public class TwoSum {
         System.out.println(twoSum[0] + ", " + twoSum[1]);
     }
 
+    /**
+     * leetcode上看到的大佬的nb解法
+     * 使用二进制上的位来保存对应的结果，可参考《编程珠玑》上的位排序
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSumBest(int[] nums, int target) {
+        int Volume = 2048;          //100000000000
+        int bitMode = Volume - 1;     //011111111111
+        int[] t = new int[Volume];  //store index+1, in order to skip default 0
+        for (int i = 0; i < nums.length; i++) {
+            int c = (target - nums[i]) & bitMode;
+            if (t[c] != 0) return new int[]{t[c] - 1, i};
+            t[nums[i] & bitMode] = i + 1;
+        }
+        return null;
+
+    }
+
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> differenceWithIndexMap = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
