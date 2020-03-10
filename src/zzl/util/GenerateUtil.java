@@ -9,7 +9,7 @@ public class GenerateUtil {
         int length = split.length;
         int[] result = new int[length];
         for (int i = 0; i < length; i++) {
-            result[i] = Integer.parseInt(split[i]);
+            result[i] = Integer.parseInt(split[i].trim());
         }
         return result;
     }

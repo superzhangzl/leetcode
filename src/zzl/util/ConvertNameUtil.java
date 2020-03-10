@@ -11,7 +11,9 @@ public class ConvertNameUtil {
      * @param args
      */
     public static void main(String[] args) {
-        String title = "construct-binary-tree-from-preorder-and-inorder-traversal";
+        String url = "https://leetcode-cn.com/problems/two-sum/";
+        String replace = url.replace("https://leetcode-cn.com/problems/", "");
+        String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
         StringBuilder sb = new StringBuilder();
         for (String s : split) {
@@ -19,6 +21,7 @@ public class ConvertNameUtil {
             sb.append(s1);
         }
         System.out.println();
+        System.out.println("@link {" + url + "}");
         System.out.println(sb.toString());
         System.out.println();
     }
