@@ -9,7 +9,6 @@ public class GenerateUtil {
     public static ListNode generateListNode(String input, String splitChar) {
         String[] split = input.split(splitChar);
         int length = split.length;
-        int[] result = new int[length];
         ListNode preRoot = new ListNode(-999);
         ListNode head = preRoot;
         for (int i = 0; i < length; i++) {
