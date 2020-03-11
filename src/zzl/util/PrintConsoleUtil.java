@@ -1,7 +1,12 @@
 package zzl.util;
 
 import zzl.base.BinaryNode;
+import zzl.base.ListNode;
 import zzl.base.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zzl
@@ -23,6 +28,15 @@ public class PrintConsoleUtil {
         nodePrinter.setTspace(4);
         nodePrinter.setSquareBranches(false);
         nodePrinter.printTree(root);
+    }
+
+    public static void printListNode(ListNode listNode) {
+        List<Integer> list = new ArrayList<>();
+        while (listNode != null) {
+            list.add(listNode.val);
+            listNode = listNode.next;
+        }
+        System.out.println(list.stream().map(String::valueOf).collect(Collectors.joining(" -> ")));
     }
 
     public static void printArray(int[][] arrs) {
