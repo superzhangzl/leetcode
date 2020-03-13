@@ -7,6 +7,9 @@ import zzl.util.PrintConsoleUtil;
 /**
  * 最大子序和
  * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和
+ * <p>
+ * 注：
+ * 使用单个数组作为输入来查找最大（或最小）元素（或总和）的问题，贪心算法是可以在线性时间解决的方法之一。
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/maximum-subarray/}
@@ -19,7 +22,23 @@ public class MaximumSubarray {
         Assert.assertEquals(new MaximumSubarray().maxSubArray(input), -1);
     }
 
+    /**
+     * 官方解题示例里的贪心算法，感觉和下面的动态规划类似，就是空间复杂的低一点，不用保存整个dp数组
+     *
+     * @param nums
+     * @return
+     * @link {https://leetcode-cn.com/problems/maximum-subarray/solution/zui-da-zi-xu-he-by-leetcode/}
+     */
     public int maxSubArray(int[] nums) {
+        int currSum = nums[0], maxSum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            currSum = Math.max(nums[i], currSum + nums[i]);
+            maxSum = Math.max(maxSum, currSum);
+        }
+        return maxSum;
+    }
+
+    public int maxSubArrayDP(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
