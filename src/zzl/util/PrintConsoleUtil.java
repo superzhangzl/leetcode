@@ -46,6 +46,7 @@ public class PrintConsoleUtil {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void printArray(char[][] arrs) {
