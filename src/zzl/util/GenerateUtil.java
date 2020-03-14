@@ -1,6 +1,10 @@
 package zzl.util;
 
 import zzl.base.ListNode;
+import zzl.base.TreeNode;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author zzl
@@ -54,5 +58,45 @@ public class GenerateUtil {
             }
         }
         return result;
+    }
+
+    public static TreeNode generateTreeNode(String input, String splitChar) {
+        Queue<Integer> queue = new LinkedList<>();
+        Queue<TreeNode> bfsNodeOrder = new LinkedList<>();
+        Queue<TreeNode> bfsRootOrder = new LinkedList<>();
+        String[] split = input.split(splitChar);
+        for (int i = 0; i < split.length; i++) {
+            try {
+                queue.add(Integer.parseInt(split[i].trim()));
+            } catch (NumberFormatException e) {
+                queue.add(null);
+            }
+        }
+        Integer rootVal = queue.poll();
+        TreeNode root = new TreeNode(rootVal);
+        bfsRootOrder.add(root);
+        while (!queue.isEmpty()) {
+            Integer leftVal = queue.poll();
+            Integer rightVal = queue.poll();
+            TreeNode currentRoot = bfsRootOrder.poll();
+            if (leftVal != null){
+                TreeNode left = new TreeNode(leftVal);
+                currentRoot.left = left;
+                bfsRootOrder.add(left);
+            }
+            if (rightVal != null){
+                TreeNode right = new TreeNode(rightVal);
+                currentRoot.right = right;
+                bfsRootOrder.add(right);
+            }
+        }
+        return root;
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = generateTreeNode("1,2,2,3,4,4,3", ",");
+        PrintConsoleUtil.printTreeNode(root);
+        root = generateTreeNode("1,2,2,null,3,null,3", ",");
+        PrintConsoleUtil.printTreeNode(root);
     }
 }
