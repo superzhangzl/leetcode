@@ -35,6 +35,31 @@ public class LinkedListCycle {
     }
 
     /**
+     * 通过使用具有 不同速度 的快、慢两个指针遍历链表，空间复杂度可以被降低至 O(1)。慢指针每次移动一步，而快指针每次移动两步。
+     * 如果列表中不存在环，最终快指针将会最先到达尾部，此时我们可以返回 false
+     *
+     * @param head
+     * @return
+     * @link {https://leetcode-cn.com/problems/linked-list-cycle/solution/huan-xing-lian-biao-by-leetcode/}
+     */
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode slow = head;
+        ListNode fast = head.next;
+        // 如果存在环，快指针会在环上比慢指针多走一圈然后再重合
+        while (slow != fast) {
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return true;
+    }
+
+    /**
      * 你能用 O(1)（即，常量）内存解决此问题吗？
      * 能：
      * 思路：每次遍历是，断开他的next节点，并且将val设置为一个特殊值
@@ -43,7 +68,7 @@ public class LinkedListCycle {
      * @param head
      * @return
      */
-    public boolean hasCycle(ListNode head) {
+    public boolean hasCycle2(ListNode head) {
         ListNode temp;
         while (head != null) {
             if (head.next == null && head.val == Integer.MIN_VALUE) {
