@@ -3,6 +3,7 @@ package zzl.leetcode;
 import org.junit.Assert;
 import zzl.util.GenerateUtil;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,12 +24,23 @@ public class MajorityElement {
     }
 
     /**
-     * 最直观的，使用Hash统计每个数字出现的次数
+     * 因为多数元素过半，先排序，取中位数
      *
      * @param nums
      * @return
      */
     public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+
+    /**
+     * 最直观的，使用Hash统计每个数字出现的次数
+     *
+     * @param nums
+     * @return
+     */
+    public int majorityElementBad(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>(nums.length);
         int maxCount = Integer.MIN_VALUE;
         int maxCountElement = Integer.MIN_VALUE;
