@@ -15,12 +15,36 @@ public class ReverseLinkedList {
         ListNode listNode = GenerateUtil.generateListNode("1->2->3->4->5", "->");
         PrintConsoleUtil.printListNode(listNode);
         PrintConsoleUtil.printListNode(new ReverseLinkedList().reverseList(listNode));
-         listNode = GenerateUtil.generateListNode("1", "->");
+        listNode = GenerateUtil.generateListNode("1", "->");
         PrintConsoleUtil.printListNode(listNode);
         PrintConsoleUtil.printListNode(new ReverseLinkedList().reverseList(listNode));
     }
 
+    /**
+     * 将当前节点的指针指向上一个（额外的变量来保存）
+     *
+     * @param head
+     * @return
+     */
     public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
+    }
+
+    /**
+     * 使用堆栈保存信息，空间复杂度为O(n)
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseListStack(ListNode head) {
         Stack<Integer> stack = new Stack<>();
         while (head != null) {
             stack.push(head.val);
