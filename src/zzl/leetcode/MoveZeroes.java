@@ -37,7 +37,7 @@ public class MoveZeroes {
      *
      * @param nums
      */
-    public void moveZeroes(int[] nums) {
+    public void moveZeroes2(int[] nums) {
         int lastIndex = nums.length - 1;
         int zeroCount = 0;
         int i = 0;
@@ -52,5 +52,26 @@ public class MoveZeroes {
             }
             PrintConsoleUtil.printArray(nums);
         }
+    }
+
+    /**
+     * 优化，原方法是将数组整体向前平移，此处使用逆向思维，将不是0的向前使用swap的方式交换
+     *
+     * @param nums
+     * @list https://leetcode-cn.com/problems/move-zeroes/solution/yi-dong-ling-by-leetcode/
+     */
+    public void moveZeroes(int[] nums) {
+        // 优化，现在是将数组整体向前平移，可以使用单个swap的方式交换
+        for (int lastNonZeroFoundAt = 0, cur = 0; cur < nums.length; cur++) {
+            if (nums[cur] != 0) {
+                swap(nums, lastNonZeroFoundAt++, cur);
+            }
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
