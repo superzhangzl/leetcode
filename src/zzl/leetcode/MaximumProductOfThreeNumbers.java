@@ -42,12 +42,44 @@ public class MaximumProductOfThreeNumbers {
     }
 
     /**
+     * 其实和排序了思路一样，也是比较最小的两个数乘最大数和最大的三个数之间的大小
+     * 这里直接就把官方示例拿过来了，写起来太麻烦，要比较好最大和最小的数
+     *
+     * @param nums
+     * @return
+     * @link {https://leetcode-cn.com/problems/maximum-product-of-three-numbers/solution/san-ge-shu-de-zui-da-cheng-ji-by-leetcode/}
+     */
+    public int maximumProduct(int[] nums) {
+        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+        int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
+        for (int n : nums) {
+            if (n <= min1) {
+                min2 = min1;
+                min1 = n;
+            } else if (n <= min2) {     // n lies between min1 and min2
+                min2 = n;
+            }
+            if (n >= max1) {            // n is greater than max1, max2 and max3
+                max3 = max2;
+                max2 = max1;
+                max1 = n;
+            } else if (n >= max2) {     // n lies betweeen max1 and max2
+                max3 = max2;
+                max2 = n;
+            } else if (n >= max3) {     // n lies betwen max2 and max3
+                max3 = n;
+            }
+        }
+        return Math.max(min1 * min2 * max1, max1 * max2 * max3);
+    }
+
+    /**
      * 要考虑负数的情况，负负得正
      *
      * @param nums
      * @return
      */
-    public int maximumProduct(int[] nums) {
+    public int maximumProductSorted(int[] nums) {
         if (nums.length == 3) {
             return nums[0] * nums[1] * nums[2];
         }
