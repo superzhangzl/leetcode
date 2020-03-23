@@ -10,6 +10,8 @@ import java.util.Stack;
  * 1 <= text.length <= 1000
  * text 由小写英文字母组成
  *
+ * 相似题型：https://leetcode-cn.com/problems/remove-duplicate-letters/
+ *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/smallest-subsequence-of-distinct-characters/}
  */
