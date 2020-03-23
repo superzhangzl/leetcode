@@ -1,7 +1,9 @@
 package zzl.huawei;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +21,9 @@ import java.util.stream.Collectors;
  */
 public class DateInputFormat {
     public static void main(String[] args) {
-        String input = "2018 02 3 1";
+//        String input = "2018 09 3 1";
+        String input = "2020 03 1 1";
+//        String input = "2018 02 1 1";
 //        String input = "2100 2 0 1";
         try {
             List<Integer> list = Arrays.asList(input.split(" ")).stream()
@@ -46,11 +50,21 @@ public class DateInputFormat {
                 System.out.println(0);
                 return;
             }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar cale = Calendar.getInstance();
+            cale.set(Calendar.YEAR, year);
+            cale.set(Calendar.MONTH, month - 1);
+            cale.set(Calendar.WEEK_OF_MONTH, week);
+            cale.set(Calendar.DAY_OF_WEEK, (dayOfWeek + 1) % 7);
+            System.out.println(sdf.format(cale.getTime()));
+
             // 年份和月份不对会直接抛异常
             LocalDate now = LocalDate.of(year, month, 1);
             // 读取本月第一天所在的周的周几
             int firstDayOfWeek = now.getDayOfWeek().getValue();
             // 然后计算第几周的周几是几号
+            // todo 修复dayOfMonth
             int dayOfMonth = week * 7 - firstDayOfWeek - 7 + dayOfWeek + 1;
             // 直接使用库函数的生成，如果抛异常直接打印null
             LocalDate result = LocalDate.of(year, month, dayOfMonth);
