@@ -81,4 +81,38 @@ public class BasicCalculator {
         // 最后重新计算一下，到最后一个时可能是个数字，他后面没有操作符导致该数字没有参与计算，就在返回的时候把他计算进去
         return result + (sign * operand);
     }
+
+    /**
+     * 下面的解法是leetcode上耗时最多的解法之一
+     */
+    char[] cs;
+    int index = 0;
+
+    public int calculate2(String s) {
+        cs = s.toCharArray();
+        return help();
+    }
+
+    int help() {
+        int sign = 1;
+        int num = 0;
+        int res = 0;
+        while (index < cs.length) {
+            char ch = cs[index++];
+            if (ch == ' ') continue;
+            if (ch >= '0' && ch <= '9') num = num * 10 + ch - '0';
+            else if (ch == '(') {
+                // 核心和官方示例中的一致，就是将当前索引保存为全局变量，不再使用stack额外保存操作符和括号前的数据
+                num = help();
+            } else if (ch == ')') {
+                break;
+            } else {
+                res += num * sign;
+                num = 0;
+                sign = ch == '+' ? 1 : -1;
+            }
+        }
+        res += num * sign;
+        return res;
+    }
 }
