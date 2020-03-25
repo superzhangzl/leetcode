@@ -83,7 +83,7 @@ public class BasicCalculator {
     }
 
     /**
-     * 下面的解法是leetcode上耗时最多的解法之一
+     * 下面的解法是leetcode上耗时最少的解法之一
      */
     char[] cs;
     int index = 0;
