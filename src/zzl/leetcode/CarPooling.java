@@ -8,6 +8,13 @@ import java.util.Comparator;
 
 /**
  * 拼车
+ * 你可以假设乘客会自觉遵守 “先下后上” 的良好素质
+ * trips.length <= 1000
+ * trips[i].length == 3
+ * 1 <= trips[i][0] <= 100
+ * 0 <= trips[i][1] < trips[i][2] <= 1000
+ * 1 <= capacity <= 100000
+ * <p>
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/car-pooling/}
@@ -37,13 +44,39 @@ public class CarPooling {
     }
 
     /**
+     * 由于题目要求的数据是规范的，那可以使用一个长度为1k的数组，记录乘客的上下车情况
+     * 然后再进行累加，当某一位置车里的最大人数达大于限定值，直接返回false，当这个数组能遍历完，那就说ok的
+     * 算是动态规划吧？效率是要比上一个解法好一些
+     *
+     * @param trips
+     * @param capacity
+     * @return
+     * @link {https://leetcode-cn.com/problems/car-pooling/solution/tong-ji-by-jerring/}
+     */
+    public boolean carPooling(int[][] trips, int capacity) {
+        int[] cnt = new int[1001];
+        for (int[] trip : trips) {
+            cnt[trip[1]] += trip[0];
+            cnt[trip[2]] -= trip[0];
+        }
+        if (cnt[0] > capacity) return false;
+        for (int i = 1; i < 1001; ++i) {
+            cnt[i] += cnt[i - 1];
+            if (cnt[i] > capacity) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * 可参考{@link LivingPeopleLcci}
      *
      * @param trips
      * @param capacity
      * @return
      */
-    public boolean carPooling(int[][] trips, int capacity) {
+    public boolean carPooling1(int[][] trips, int capacity) {
         // 记录这上车人数和上车点
         int[][] getOn = new int[trips.length][2];
         // 记录这下车人数和下车点
