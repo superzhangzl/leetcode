@@ -20,6 +20,7 @@ import java.util.Arrays;
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/living-people-lcci/}
+ * @tag
  */
 public class LivingPeopleLcci {
     public static void main(String[] args) {
@@ -67,6 +68,7 @@ public class LivingPeopleLcci {
                 // 挂了一个
                 sum--;
             }
+            System.out.println(String.format("i=%d, j=%d, sum=%d", i, j, sum));
         }
         return birth[flag];
     }
