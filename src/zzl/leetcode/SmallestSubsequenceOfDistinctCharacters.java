@@ -14,6 +14,7 @@ import java.util.Stack;
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/smallest-subsequence-of-distinct-characters/}
+ * @tag
  */
 public class SmallestSubsequenceOfDistinctCharacters {
     public static void main(String[] args) {

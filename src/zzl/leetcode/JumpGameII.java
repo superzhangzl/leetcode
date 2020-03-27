@@ -9,6 +9,7 @@ import zzl.util.GenerateUtil;
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/jump-game-ii/}
+ * @tag
  */
 public class JumpGameII {
     public static void main(String[] args) {

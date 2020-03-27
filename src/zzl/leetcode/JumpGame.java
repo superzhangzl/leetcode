@@ -3,8 +3,11 @@ package zzl.leetcode;
 import org.junit.Assert;
 
 /**
+ * 跳跃游戏
+ *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/jump-game/}
+ * @tag
  */
 public class JumpGame {
     public static void main(String[] args) {

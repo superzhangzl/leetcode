@@ -1,4 +1,4 @@
-package zzl.huawei;
+package zzl.hw;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -18,11 +18,12 @@ import java.util.stream.Collectors;
  * todo　这个题只通过了40% 的样例，其他的输入还需要再考虑考虑
  *
  * @author zzl
+ * @tag
  */
 public class DateInputFormat {
     public static void main(String[] args) {
 //        String input = "2018 09 3 1";
-        String input = "2020 03 1 1";
+        String input = "2020 02 1 1";
 //        String input = "2018 02 1 1";
 //        String input = "2100 2 0 1";
         try {

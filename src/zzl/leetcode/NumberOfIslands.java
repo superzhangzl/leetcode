@@ -12,6 +12,7 @@ import java.util.Queue;
  * @link {https://leetcode-cn.com/problems/number-of-islands/}
  * @link {https://leetcode-cn.com/problems/number-of-islands/solution/dfs-bfs-bing-cha-ji-python-dai-ma-java-dai-ma-by-l/}
  * @link {https://blog.csdn.net/liujian20150808/article/details/50848646}
+ * @tag
  */
 public class NumberOfIslands {
     public static void main(String[] args) {
