@@ -12,14 +12,14 @@ import java.util.Queue;
  * @link {https://leetcode-cn.com/problems/number-of-islands/}
  * @link {https://leetcode-cn.com/problems/number-of-islands/solution/dfs-bfs-bing-cha-ji-python-dai-ma-java-dai-ma-by-l/}
  * @link {https://blog.csdn.net/liujian20150808/article/details/50848646}
- * @tag
+ * @tag 200
  */
 public class NumberOfIslands {
     public static void main(String[] args) {
         char[][] grid = new char[][]{
                 {'0', '1', '1', '1', '0'},
                 {'1', '1', '0', '1', '0'},
-                {'1', '1', '0', '0', '1'},
+                {'1', '1', '0', '1', '1'},
                 {'0', '0', '0', '1', '1'}
         };
         for (int i = 0; i < grid.length; i++) {

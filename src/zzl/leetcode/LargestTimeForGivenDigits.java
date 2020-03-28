@@ -12,7 +12,7 @@ import zzl.util.GenerateUtil;
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/largest-time-for-given-digits/}
- * @tag
+ * @tag 949
  */
 public class LargestTimeForGivenDigits {
     public static void main(String[] args) {

@@ -7,7 +7,7 @@ import org.junit.Assert;
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/jump-game/}
- * @tag
+ * @tag 55
  */
 public class JumpGame {
     public static void main(String[] args) {

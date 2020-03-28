@@ -15,7 +15,7 @@ import java.util.Arrays;
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/maximum-product-of-three-numbers/}
- * @tag
+ * @tag 628
  */
 public class MaximumProductOfThreeNumbers {
     public static void main(String[] args) {

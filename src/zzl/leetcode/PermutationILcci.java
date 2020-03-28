@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/permutation-i-lcci/}
- * @tag
+ * @tag 08.07
  */
 public class PermutationILcci {
     public static void main(String[] args) {

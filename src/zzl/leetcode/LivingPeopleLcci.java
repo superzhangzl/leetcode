@@ -21,7 +21,7 @@ import java.util.Arrays;
  *
  * @author zzl
  * @link {https://leetcode-cn.com/problems/living-people-lcci/}
- * @tag
+ * @tag 16.10
  */
 public class LivingPeopleLcci {
     public static void main(String[] args) {
