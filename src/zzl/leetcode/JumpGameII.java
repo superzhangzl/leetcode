@@ -38,6 +38,7 @@ public class JumpGameII {
         // 当前情况下，可跳的最远位置
         int currentMaxJumpPosition = 0;
         // 修复，不用去操作最后一位数，因为最后一个位置是 0 步
+        // 题目有假设最后最后一个位置是可达的，所以这里的返回是nums.length - 1,否则需要改成nums.length，同时限制最后累加时不将最后一次纳入判断
         for (int i = 0; i < nums.length - 1; i++) {
             if (i > maxJumpStep) {
                 //表示不可达
@@ -47,6 +48,8 @@ public class JumpGameII {
             maxJumpStep = Integer.max(maxJumpStep, i + nums[i]);
             System.out.println(maxJumpStep);
             // 当i等于当前最远可跳的距离时，就需要更新一下下一次可跳的最远距离了
+            // 如果不一定可达，则需要在此处设置，并将i的范围变成[0, nums.length)
+//            if (i == currentMaxJumpPosition && i != nums.length - 1) {
             if (i == currentMaxJumpPosition) {
                 currentMaxJumpPosition = maxJumpStep;
                 minJumpCount++;
