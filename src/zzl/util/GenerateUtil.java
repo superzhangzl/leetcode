@@ -3,13 +3,15 @@ package zzl.util;
 import zzl.base.ListNode;
 import zzl.base.TreeNode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
  * @author zzl
  */
-public class GenerateUtil {
+public class GenerateUtil<T> {
     public static ListNode generateListNode(String input, String splitChar) {
         String[] split = input.split(splitChar);
         int length = split.length;
@@ -62,7 +64,6 @@ public class GenerateUtil {
 
     public static TreeNode generateTreeNode(String input, String splitChar) {
         Queue<Integer> queue = new LinkedList<>();
-        Queue<TreeNode> bfsNodeOrder = new LinkedList<>();
         Queue<TreeNode> bfsRootOrder = new LinkedList<>();
         String[] split = input.split(splitChar);
         for (int i = 0; i < split.length; i++) {
@@ -79,18 +80,34 @@ public class GenerateUtil {
             Integer leftVal = queue.poll();
             Integer rightVal = queue.poll();
             TreeNode currentRoot = bfsRootOrder.poll();
-            if (leftVal != null){
+            if (leftVal != null) {
                 TreeNode left = new TreeNode(leftVal);
                 currentRoot.left = left;
                 bfsRootOrder.add(left);
             }
-            if (rightVal != null){
+            if (rightVal != null) {
                 TreeNode right = new TreeNode(rightVal);
                 currentRoot.right = right;
                 bfsRootOrder.add(right);
             }
         }
         return root;
+    }
+
+
+    public static List<List<Integer>> generateBinaryList(String input, String splitChar) {
+        String[] split = input.split("\n");
+        int height = split.length;
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < height; i++) {
+            String[] number = split[i].split(splitChar);
+            List<Integer> line = new ArrayList<>();
+            for (int j = 0; j < number.length; j++) {
+                line.add(Integer.valueOf(number[j]));
+            }
+            result.add(line);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
