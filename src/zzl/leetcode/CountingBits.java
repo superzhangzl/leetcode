@@ -15,10 +15,21 @@ public class CountingBits {
     }
 
     /**
+     * https://leetcode-cn.com/problems/counting-bits/solution/bi-te-wei-ji-shu-by-leetcode/
+     */
+    public int[] countBits(int num) {
+        int[] result = new int[num + 1];
+        for (int i = 0; i <= num; i++) {
+            result[i] = result[i >> 1] + (i & 1);
+        }
+        return result;
+    }
+
+    /**
      * @param num
      * @return
      */
-    public int[] countBits(int num) {
+    public int[] countBitsBad(int num) {
         int[] result = new int[num + 1];
         for (int i = 0; i <= num; i++) {
             result[i] = calculateCount(i);
