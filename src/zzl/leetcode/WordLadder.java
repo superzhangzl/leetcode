@@ -1,7 +1,8 @@
 package zzl.leetcode;
 
-import javafx.util.Pair;
 import org.junit.Assert;
+import zzl.base.Pair;
+
 
 import java.util.*;
 
