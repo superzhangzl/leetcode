@@ -11,7 +11,7 @@ public class ConvertNameUtil {
      * @param args
      */
     public static void main(String[] args) {
-        String url = "https://leetcode-cn.com/problems/subarray-sum-equals-k/";
+        String url = "https://leetcode-cn.com/problems/find-the-duplicate-number/";
         String replace = url.replace("https://leetcode-cn.com/problems/", "");
         String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
