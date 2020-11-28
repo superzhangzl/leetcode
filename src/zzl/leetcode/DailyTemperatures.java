@@ -4,6 +4,8 @@ import org.junit.Assert;
 import zzl.util.GenerateUtil;
 import zzl.util.PrintConsoleUtil;
 
+import java.util.Stack;
+
 /**
  * 每日温度
  *
@@ -24,7 +26,28 @@ public class DailyTemperatures {
 
     }
 
+    /**
+     * 单调栈
+     * 保证栈的顺序是递减的，如果出现某一个数大于栈顶对应的数，就将栈弹出
+     * 结束后将当前节点的下标放入单调栈中
+     *
+     * @param T 温度历史记录
+     * @return 结果
+     */
     public int[] dailyTemperatures(int[] T) {
+        Stack<Integer> stack = new Stack<>();
+        int[] res = new int[T.length];
+        for (int i = 0; i < T.length; i++) {
+            while (!stack.isEmpty() && T[stack.peek()] < T[i]) {
+                int topIndex = stack.pop();
+                res[topIndex] = i - topIndex;
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+
+    public int[] dailyTemperaturesBad(int[] T) {
         int[] res = new int[T.length];
         for (int i = 0; i < T.length - 1; i++) {
             int step = 0;
