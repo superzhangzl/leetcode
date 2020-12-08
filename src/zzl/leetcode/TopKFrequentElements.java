@@ -36,11 +36,7 @@ public class TopKFrequentElements {
     public int[] topKFrequent(int[] nums, int k) {
         HashMap<Integer, Integer> kCount = new HashMap<>();
         for (int num : nums) {
-            if (kCount.containsKey(num)) {
-                kCount.put(num, kCount.get(num) + 1);
-            } else {
-                kCount.put(num, 1);
-            }
+            kCount.put(num, kCount.getOrDefault(num, 0) + 1);
         }
 
         System.out.println(kCount);
