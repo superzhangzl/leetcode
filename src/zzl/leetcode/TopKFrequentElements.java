@@ -26,13 +26,6 @@ public class TopKFrequentElements {
 
     }
 
-    /**
-     * 先hash统计个数，再排序
-     *
-     * @param nums
-     * @param k
-     * @return
-     */
     public int[] topKFrequent(int[] nums, int k) {
         HashMap<Integer, Integer> kCount = new HashMap<>();
         for (int num : nums) {
@@ -40,6 +33,48 @@ public class TopKFrequentElements {
         }
 
         System.out.println(kCount);
+        PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.comparingInt(kCount::get));
+        for (Integer key : kCount.keySet()) {
+            if (queue.size() < k) {
+                queue.add(key);
+            } else if (kCount.get(key) > kCount.get(queue.peek())) {
+                queue.remove();
+                queue.add(key);
+            }
+        }
+        System.out.println(queue);
+        int[] res = new int[k];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = queue.poll();
+        }
+        return res;
+    }
+
+    /**
+     * 先hash统计个数，再排序
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int[] topKFrequent2(int[] nums, int k) {
+        HashMap<Integer, Integer> kCount = new HashMap<>();
+        for (int num : nums) {
+            kCount.put(num, kCount.getOrDefault(num, 0) + 1);
+        }
+
+        System.out.println(kCount);
+        PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.comparingInt(kCount::get));
+        for (Integer key : kCount.keySet()) {
+            if (queue.size() < k) {
+                queue.add(key);
+            } else if (kCount.get(key) > kCount.get(queue.peek())) {
+                queue.remove();
+                queue.add(key);
+            }
+        }
+        System.out.println(queue);
+
         List<Integer> list = kCount.entrySet()
                 .stream()
                 .map(Map.Entry::getKey)
