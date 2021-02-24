@@ -12,6 +12,8 @@ import java.util.Queue;
  * @author zzl
  */
 public class GenerateUtil<T> {
+    private static String DEFAULT_SPLIT_CHAR = ",";
+
     public static ListNode generateListNode(String input, String splitChar) {
         String[] split = input.split(splitChar);
         int length = split.length;
@@ -26,6 +28,16 @@ public class GenerateUtil<T> {
 
     public static int[] generateIntArray(String input, String splitChar) {
         String[] split = input.split(splitChar);
+        int length = split.length;
+        int[] result = new int[length];
+        for (int i = 0; i < length; i++) {
+            result[i] = Integer.parseInt(split[i].trim());
+        }
+        return result;
+    }
+
+    public static int[] generateIntArray(String input) {
+        String[] split = input.split(DEFAULT_SPLIT_CHAR);
         int length = split.length;
         int[] result = new int[length];
         for (int i = 0; i < length; i++) {
