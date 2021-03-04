@@ -60,6 +60,10 @@ public class GenerateUtil<T> {
         return result;
     }
 
+    public static int[][] generateBinaryIntArray(String input) {
+        return generateBinaryIntArray(input, DEFAULT_SPLIT_CHAR);
+    }
+
     public static char[][] generateBinaryCharArray(String input, String splitChar) {
         String[] split = input.split("\n");
         int height = split.length;
