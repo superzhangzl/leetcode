@@ -58,7 +58,7 @@ public class MapOfHighestPeak {
                 int x = pos[0] + pair.x;
                 int y = pos[1] + pair.y;
                 if (x >= 0 && x < isWater.length && y >= 0 && y < isWater[0].length && isWater[x][y] == 0) {
-                    // x,y 相比较原位置的海拔要多1，满足题意。也就是x,y是个陆地，name就相比较原位置海拔要大于1，有可能被新值覆盖
+                    // x,y 相比较原位置的海拔要多1，满足题意。也就是x,y是个陆地，name就相比较原位置海拔要大于1
                     result[x][y] = result[pair.x][pair.y] + 1;
                     // 从水域出发，标记当前陆地节点为水域，即已经访问过了
                     isWater[x][y] = 1;
