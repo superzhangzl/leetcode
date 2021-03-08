@@ -11,7 +11,7 @@ import java.util.Queue;
 /**
  * @author zzl
  */
-public class GenerateUtil<T> {
+public class GenerateUtil {
     private static String DEFAULT_SPLIT_CHAR = ",";
 
     public static ListNode generateListNode(String input, String splitChar) {
@@ -44,6 +44,14 @@ public class GenerateUtil<T> {
             result[i] = Integer.parseInt(split[i].trim());
         }
         return result;
+    }
+
+    public static int[][] generateBinaryIntArrayBetter(String s) {
+        String replace = s.trim()
+                .replaceAll("\\],\\[", "\n")
+                .replace("[[", "")
+                .replace("]]", "");
+        return generateBinaryIntArray(replace);
     }
 
     public static int[][] generateBinaryIntArray(String input, String splitChar) {
