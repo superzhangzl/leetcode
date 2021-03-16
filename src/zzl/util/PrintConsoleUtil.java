@@ -5,6 +5,8 @@ import zzl.base.ListNode;
 import zzl.base.TreeNode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,5 +80,16 @@ public class PrintConsoleUtil {
             }
         }
         System.out.println();
+    }
+
+    public static void printParams(Object... params) {
+        if (params.length % 2 != 0) {
+            System.out.println("printParams param error....");
+        }
+        HashMap<Object, Object> map = new LinkedHashMap<>();
+        for (int i = 0; i < params.length; i += 2) {
+            map.put(params[i], params[i + 1]);
+        }
+        System.out.println(map);
     }
 }
