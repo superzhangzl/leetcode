@@ -3,10 +3,8 @@ package zzl.util;
 import zzl.base.ListNode;
 import zzl.base.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author zzl
@@ -52,6 +50,28 @@ public class GenerateUtil {
                 .replace("[[", "")
                 .replace("]]", "");
         return generateBinaryIntArray(replace);
+    }
+
+
+    public static List<List<Integer>> generateBinaryIntList(String s) {
+        String replace = s.trim()
+                .substring(1, s.trim().length() - 1);
+        List<List<Integer>> list = new ArrayList<>();
+        // 按照正则表达式分割
+        String[] lineSplit = replace.split("(?<=\\]),(?=\\[)");
+        for (String line : lineSplit) {
+            // 分割后的每一节都包含"[]"，所以从起始向里位移一位裁剪
+            String tmp = line.substring(1, line.length() - 1);
+            List<Integer> ll = new ArrayList<>();
+            if (tmp.length() != 0) {
+                String[] split = tmp.split(DEFAULT_SPLIT_CHAR);
+                for (int i = 0; i < split.length; i++) {
+                    ll.add(Integer.valueOf(split[i]));
+                }
+            }
+            list.add(ll);
+        }
+        return list;
     }
 
     public static int[][] generateBinaryIntArray(String input, String splitChar) {

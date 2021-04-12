@@ -67,6 +67,14 @@ public class PrintConsoleUtil {
         System.out.println();
     }
 
+    public static void printArray(Object[] arrs) {
+        System.out.println("===");
+        for (int i = 0; i < arrs.length; i++) {
+            System.out.println("[" + i + "]:>" + arrs[i]);
+        }
+        System.out.println("===");
+    }
+
     public static void printArrayWithIndex(int[] arrs, int index) {
         for (int i = 0; i < arrs.length; i++) {
             System.out.print(String.format("%2d ", arrs[i]));
