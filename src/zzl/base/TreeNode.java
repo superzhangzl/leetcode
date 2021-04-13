@@ -4,7 +4,7 @@ package zzl.base;
 /**
  * @author zzl
  */
-public class TreeNode<T> {
+public class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;

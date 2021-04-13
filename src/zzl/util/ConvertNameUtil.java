@@ -11,7 +11,7 @@ public class ConvertNameUtil {
      * @param args
      */
     public static void main(String[] args) {
-        String url = "https://leetcode-cn.com/problems/maximum-width-ramp/";
+        String url = "https://leetcode-cn.com/problems/house-robber-iii/";
         String replace = url.replace("https://leetcode-cn.com/problems/", "");
         String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
@@ -26,6 +26,7 @@ public class ConvertNameUtil {
             }
         }
         System.out.println();
+        System.out.println("@author zzl");
         System.out.println("@link {" + url + "}");
         System.out.println(sb.toString());
         System.out.println();

@@ -111,6 +111,10 @@ public class GenerateUtil {
         return result;
     }
 
+    public static TreeNode generateTreeNode(String input) {
+        return generateTreeNode(input, DEFAULT_SPLIT_CHAR);
+    }
+
     public static TreeNode generateTreeNode(String input, String splitChar) {
         Queue<Integer> queue = new LinkedList<>();
         Queue<TreeNode> bfsRootOrder = new LinkedList<>();
