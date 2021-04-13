@@ -11,6 +11,11 @@ import java.util.stream.Collectors;
  */
 public class GenerateUtil {
     private static String DEFAULT_SPLIT_CHAR = ",";
+    private static String DEFAULT_LIST_NODE_SPLIT_CHAR = "->";
+
+    public static ListNode generateListNode(String input) {
+        return generateListNode(input, DEFAULT_LIST_NODE_SPLIT_CHAR);
+    }
 
     public static ListNode generateListNode(String input, String splitChar) {
         String[] split = input.split(splitChar);
