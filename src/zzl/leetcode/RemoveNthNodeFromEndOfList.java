@@ -1,5 +1,7 @@
 package zzl.leetcode;
 
+import zzl.base.ListNode;
+
 /**
  * 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
  * <p>
@@ -14,22 +16,6 @@ package zzl.leetcode;
  * @link {https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/}
  */
 public class RemoveNthNodeFromEndOfList {
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-
-        @Override
-        public String toString() {
-            return "ListNode{" +
-                    "val=" + val +
-                    ", next=" + next +
-                    '}';
-        }
-    }
 
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);
