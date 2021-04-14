@@ -2,6 +2,9 @@ package zzl.leetcode;
 
 import org.junit.Assert;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 正则表达式匹配
  *
@@ -29,9 +32,10 @@ public class RegularExpressionMatching {
         return dp(s.toCharArray(), 0, p.toCharArray(), 0);
     }
 
+    Map<String, Boolean> cache = new HashMap<>();
+
     /**
      * 动态规划
-     * TODO：待优化，使用缓存提高速度
      *
      * @param s
      * @param i
@@ -57,6 +61,11 @@ public class RegularExpressionMatching {
             }
             return true;
         }
+        String key = i + "," + j;
+        if (cache.containsKey(key)) {
+            return cache.get(key);
+        }
+        boolean res;
         // 匹配到了：“.”通配或者相同字符
         if (s[i] == p[j] || p[j] == '.') {
             if (j < p.length - 1 && p[j + 1] == '*') {
@@ -65,20 +74,23 @@ public class RegularExpressionMatching {
                 // “*”匹配到了，i向后移动一位接着判断（*匹配多次）
                 boolean match = dp(s, i + 1, p, j);
                 // 两种情况只要有一种匹配到了就算匹配到了
-                return none || match;
+                res = none || match;
             } else {
                 // 字符的形式匹配到，那就同时向后移动一位
-                return dp(s, i + 1, p, j + 1);
+                boolean match = dp(s, i + 1, p, j + 1);
+                res = match;
             }
         } else {
             if (j < p.length - 1 && p[j + 1] == '*') {
                 // 虽然字符不匹配，但是由于有一个*，并且*表示匹配0次，符合条件
                 boolean none = dp(s, i, p, j + 2);
-                return none;
+                res = none;
             } else {
                 // 字符直接不匹配，且没有特殊字符
-                return false;
+                res = false;
             }
         }
+        cache.put(key, res);
+        return res;
     }
 }
