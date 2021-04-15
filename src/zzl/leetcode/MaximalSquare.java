@@ -2,6 +2,7 @@ package zzl.leetcode;
 
 import org.junit.Assert;
 import zzl.util.GenerateUtil;
+import zzl.util.PrintConsoleUtil;
 
 /**
  * 最大正方形
@@ -15,16 +16,16 @@ public class MaximalSquare {
                 "1 0 1 1 1\n" +
                 "1 1 1 1 1\n" +
                 "1 0 0 1 0";
-        char[][] matrix = GenerateUtil.generateBinaryCharArray(input," ");
+        char[][] matrix = GenerateUtil.generateBinaryCharArray(input, " ");
         Assert.assertEquals(new MaximalSquare().maximalSquare(matrix), 4);
         Assert.assertEquals(new MaximalSquare().maximalSquare(new char[][]{{}}), 0);
-        Assert.assertEquals(new MaximalSquare().maximalSquare(new char[][]{{1}}), 1);
+        Assert.assertEquals(new MaximalSquare().maximalSquare(new char[][]{{'1'}}), 1);
     }
 
     /**
      * @param matrix
      * @return
-     * @link https://leetcode-cn.com/problems/maximal-square/solution/zui-da-zheng-fang-xing-by-leetcode/
+     * @link {https://leetcode-cn.com/problems/maximal-square/solution/zui-da-zheng-fang-xing-by-leetcode/}
      */
     public int maximalSquare(char[][] matrix) {
         int rows = matrix.length, cols = rows > 0 ? matrix[0].length : 0;
@@ -66,5 +67,4 @@ public class MaximalSquare {
         }
         return maxsqlen * maxsqlen;
     }
-
 }

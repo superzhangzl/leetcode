@@ -17,7 +17,7 @@ public class ConvertNameUtil {
      * @param args
      */
     public static void main(String[] args) throws IOException {
-        String url = "https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/";
+        String url = "https://leetcode-cn.com/problems/maximal-rectangle/";
         String replace = url.replace("https://leetcode-cn.com/problems/", "");
         String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
@@ -57,6 +57,7 @@ public class ConvertNameUtil {
     private static String TEMPLATE = "package zzl.leetcode;\n" +
             "\n" +
             "/**\n" +
+            " * \n" +
             " * \n" +
             " * %s\n" +
             " * %s\n" +

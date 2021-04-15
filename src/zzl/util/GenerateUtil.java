@@ -57,6 +57,14 @@ public class GenerateUtil {
         return generateBinaryIntArray(replace);
     }
 
+    public static char[][] generateBinaryCharArrayBetter(String s) {
+        String replace = s.trim()
+                .replaceAll("\\],\\[", "\n")
+                .replace("[[", "")
+                .replace("]]", "");
+        return generateBinaryCharArray(replace, DEFAULT_SPLIT_CHAR);
+    }
+
 
     public static List<List<Integer>> generateBinaryIntList(String s) {
         String replace = s.trim()
@@ -105,7 +113,8 @@ public class GenerateUtil {
         for (int i = 0; i < height; i++) {
             String[] number = split[i].split(splitChar);
             for (int j = 0; j < width; j++) {
-                result[i][j] = number[j].charAt(0);
+                String beauty = number[j].replaceAll("\"", "").replaceAll("\'", "");
+                result[i][j] = beauty.charAt(0);
             }
         }
         return result;
