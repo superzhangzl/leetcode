@@ -28,7 +28,36 @@ public class SuperEggDrop {
     }
 
     public int superEggDrop(int k, int n) {
-        return dp(k, n);
+        return dp2(k, n);
+    }
+
+    public int dp2(int k, int n) {
+        if (k == 1) {
+            return n;
+        }
+        if (n == 0) {
+            return 0;
+        }
+        String key = k + "," + n;
+        if (cache.containsKey(key)) {
+            return cache.get(key);
+        }
+        int res = Integer.MAX_VALUE;
+        int lo = 1, hi = n;
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            int broken = dp2(k - 1, mid - 1);
+            int not_broken = dp2(k, n - mid);
+            if (broken > not_broken) {
+                hi = mid - 1;
+                res = Math.min(res, broken + 1);
+            } else {
+                lo = mid + 1;
+                res = Math.min(res, not_broken + 1);
+            }
+        }
+        cache.put(key, res);
+        return res;
     }
 
 
