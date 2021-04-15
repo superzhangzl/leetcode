@@ -1,5 +1,11 @@
 package zzl.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 /**
  * @author zzl
  */
@@ -10,8 +16,8 @@ public class ConvertNameUtil {
      *
      * @param args
      */
-    public static void main(String[] args) {
-        String url = "https://leetcode-cn.com/problems/regular-expression-matching/";
+    public static void main(String[] args) throws IOException {
+        String url = "https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/";
         String replace = url.replace("https://leetcode-cn.com/problems/", "");
         String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
@@ -25,10 +31,39 @@ public class ConvertNameUtil {
                 sb.append(s1);
             }
         }
-        System.out.println();
-        System.out.println("@author zzl");
-        System.out.println("@link {" + url + "}");
-        System.out.println(sb.toString());
-        System.out.println();
+        String author = "@author zzl";
+        String link = "@link {" + url + "}";
+        String className = sb.toString();
+
+        String javaFileContent = String.format(TEMPLATE, author, link, className);
+        String filePath = LEETCODE_DIR + File.separator + className + ".java";
+        if (!Files.exists(Paths.get(filePath))) {
+            System.out.println(filePath);
+            Files.write(Paths.get(filePath), javaFileContent.getBytes(StandardCharsets.UTF_8));
+            System.out.println("创建成功~");
+        } else {
+            System.out.println("文件已存在~");
+        }
     }
+
+    /**
+     * leetcode文件目录
+     */
+    private static String LEETCODE_DIR = "C:\\Users\\z30003077\\IdeaProjects\\leetcode\\src\\zzl\\leetcode";
+
+    /**
+     * java文件模板
+     */
+    private static String TEMPLATE = "package zzl.leetcode;\n" +
+            "\n" +
+            "/**\n" +
+            " * \n" +
+            " * %s\n" +
+            " * %s\n" +
+            " */\n" +
+            "public class %s {\n" +
+            "    public static void main(String[] args) {\n" +
+            "        \n" +
+            "    }\n" +
+            "}\n";
 }
