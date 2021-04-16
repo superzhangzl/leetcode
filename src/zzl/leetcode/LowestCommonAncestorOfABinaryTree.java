@@ -26,6 +26,16 @@ public class LowestCommonAncestorOfABinaryTree {
         Assert.assertEquals(commonAncestor.val, -1);
     }
 
+    /**
+     * 当前方法比较low，通过比较最长公共字符串找到最近公共父元素
+     * 参考{@link ErChaShuDeZuiJinGongGongZuXianLcof#lowestCommonAncestor(TreeNode, TreeNode, TreeNode)}中的解析，
+     * 通过结构性的递归找到最近的公共父元素
+     *
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         found = false;
         ArrayList<Integer> path1 = pathToTarget(root, p, new ArrayList<>());
