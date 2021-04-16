@@ -27,10 +27,45 @@ public class EditDistance {
         Assert.assertEquals(minDistance, 5);
     }
 
+    public int minDistance(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            // 此处的base case就是一个单词有，另一个单词是空串，那要变过去直接把当前的长度设置即可
+            dp[i][0] = i;
+        }
+        for (int j = 1; j <= n; j++) {
+            dp[0][j] = j;
+        }
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                // 字符串的下标从0开始
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = Math.min(dp[i - 1][j] + 1,
+                            Math.min(dp[i][j - 1] + 1,
+                                    dp[i - 1][j - 1] + 1));
+                }
+            }
+        }
+        return dp[m][n];
+
+
+    }
+
     char[] s1;
     char[] s2;
 
-    public int minDistance(String word1, String word2) {
+    /**
+     * 递归版本
+     *
+     * @param word1
+     * @param word2
+     * @return
+     */
+    public int minDistanceRecursive(String word1, String word2) {
         s1 = word1.toCharArray();
         s2 = word2.toCharArray();
         return dp(word1.length() - 1, word2.length() - 1);
