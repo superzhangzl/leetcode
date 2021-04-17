@@ -3,8 +3,10 @@ package zzl.util;
 import zzl.base.ListNode;
 import zzl.base.TreeNode;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * @author zzl
@@ -172,10 +174,26 @@ public class GenerateUtil {
         return result;
     }
 
+    /**
+     * 链表反转
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode reverseListNode(ListNode head) {
+        ListNode pre = null, cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
     public static void main(String[] args) {
-        TreeNode root = generateTreeNode("1,2,2,3,4,4,3", ",");
-        PrintConsoleUtil.printTreeNode(root);
-        root = generateTreeNode("1,2,2,null,3,null,3", ",");
-        PrintConsoleUtil.printTreeNode(root);
+        ListNode listNode = generateListNode("-1->5->3->4->0");
+        PrintConsoleUtil.printListNode(listNode);
+        PrintConsoleUtil.printListNode(reverseListNode(listNode));
     }
 }

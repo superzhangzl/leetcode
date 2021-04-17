@@ -1,8 +1,31 @@
 package zzl.util;
 
+import zzl.base.ListNode;
+
 import java.util.List;
 
 public class SpecialAssertUtil {
+
+    /**
+     * 校验两个顺序链表的值是否一致
+     *
+     * @param expected
+     * @param actual
+     */
+    public static void assertListNode(ListNode expected, ListNode actual) {
+        ListNode na = expected, nb = actual;
+        while (na != null && nb != null) {
+            if (na.val != nb.val) {
+                throw new AssertionError(String.format("[%d] is not equal actual listNode [%d]", na.val, nb.val));
+            } else {
+                na = na.next;
+                nb = nb.next;
+            }
+        }
+        if (na != null || nb != null) {
+            throw new AssertionError(String.format("listNode length not equal"));
+        }
+    }
 
     /**
      * 校验String 类型的数组元素是否包含，不校验顺序，只要包含即可
