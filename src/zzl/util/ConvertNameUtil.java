@@ -20,7 +20,7 @@ public class ConvertNameUtil {
      * @param args
      */
     public static void main(String[] args) throws IOException {
-        String url = "https://leetcode-cn.com/problems/reverse-nodes-in-k-group/";
+        String url = "https://leetcode-cn.com/problems/sudoku-solver/";
         String replace = url.replace("https://leetcode-cn.com/problems/", "");
         String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
@@ -60,13 +60,13 @@ public class ConvertNameUtil {
     private static String TEMPLATE = "package zzl.leetcode;\n" +
             "\n" +
             "import zzl.base.annotation.Level;\n" +
-            "import static zzl.base.enums.Difficulty.*;\n" +
+            "import static zzl.base.enums.Difficulty.*;\n\n" +
             "/**\n" +
             " * \n" +
             " * \n" +
             " * %s\n" +
             " * %s\n" +
-            " */\n\n" +
+            " */\n" +
             "@Level()\n" +
             "public class %s {\n" +
             "    public static void main(String[] args) {\n" +
