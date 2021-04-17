@@ -3,6 +3,7 @@ package zzl.util;
 import zzl.base.ListNode;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpecialAssertUtil {
 
@@ -25,6 +26,11 @@ public class SpecialAssertUtil {
         if (na != null || nb != null) {
             throw new AssertionError(String.format("listNode length not equal"));
         }
+    }
+
+    public static void assertIntListContain(List<Integer> expected, List<Integer> actual) {
+        assertStringListContain(expected.stream().map(String::valueOf).collect(Collectors.toList()),
+                actual.stream().map(String::valueOf).collect(Collectors.toList()));
     }
 
     /**
