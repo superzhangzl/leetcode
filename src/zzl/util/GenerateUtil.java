@@ -53,6 +53,7 @@ public class GenerateUtil {
 
     public static int[][] generateBinaryIntArrayBetter(String s) {
         String replace = s.trim()
+                .replaceAll("\\s", "")
                 .replaceAll("\\],\\[", "\n")
                 .replace("[[", "")
                 .replace("]]", "");
