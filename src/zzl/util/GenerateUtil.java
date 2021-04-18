@@ -3,17 +3,15 @@ package zzl.util;
 import zzl.base.ListNode;
 import zzl.base.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author zzl
  */
 public class GenerateUtil {
-    private static String DEFAULT_SPLIT_CHAR = ",";
-    private static String DEFAULT_LIST_NODE_SPLIT_CHAR = "->";
+    private static final String DEFAULT_SPLIT_CHAR = ",";
+    private static final String DEFAULT_LIST_NODE_SPLIT_CHAR = "->";
 
     public static ListNode generateListNode(String input) {
         return generateListNode(input, DEFAULT_LIST_NODE_SPLIT_CHAR);
@@ -116,7 +114,7 @@ public class GenerateUtil {
         for (int i = 0; i < height; i++) {
             String[] number = split[i].split(splitChar);
             for (int j = 0; j < width; j++) {
-                String beauty = number[j].replaceAll("\"", "").replaceAll("\'", "");
+                String beauty = number[j].replaceAll("\"", "").replaceAll("'", "");
                 result[i][j] = beauty.charAt(0);
             }
         }
@@ -190,6 +188,26 @@ public class GenerateUtil {
             cur = next;
         }
         return pre;
+    }
+
+    public static String[] generateStringArray(String s, String splitChar) {
+        return Arrays.stream(s.split(splitChar))
+                .map(s1 -> s1.substring(1, s1.length() - 1))
+                .collect(Collectors.toList())
+                .toArray(new String[0]);
+    }
+
+    public static String[] generateStringArray(String s) {
+        String beauty = beautyInputString(s);
+        return generateStringArray(beauty, DEFAULT_SPLIT_CHAR);
+    }
+
+    private static String beautyInputString(String s) {
+        return s.trim()
+                .replaceAll("\\s", "")
+                .replaceAll("\\],\\[", "\n")
+                .replace("[[", "")
+                .replace("]]", "");
     }
 
     public static void main(String[] args) {
