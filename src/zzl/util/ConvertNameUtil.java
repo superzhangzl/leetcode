@@ -19,7 +19,7 @@ public class ConvertNameUtil {
      * @param args
      */
     public static void main(String[] args) throws IOException {
-        String url = "https://leetcode-cn.com/problems/satisfiability-of-equality-equations/";
+        String url = "https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/";
         String replace = url.replace("https://leetcode-cn.com/problems/", "");
         String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
