@@ -1,13 +1,12 @@
 package zzl.util;
 
-import zzl.base.enums.Difficulty;
-import zzl.base.annotation.Level;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author zzl
@@ -36,9 +35,10 @@ public class ConvertNameUtil {
         }
         String author = "@author zzl";
         String link = "@link {" + url + "}";
+        String date = "@date " + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String className = sb.toString();
-
-        String javaFileContent = String.format(TEMPLATE, author, link, className);
+        String javaFileContent = String.format(TEMPLATE, author, date, link, className);
+        System.out.println(javaFileContent);
         String filePath = LEETCODE_DIR + File.separator + className + ".java";
         if (!Files.exists(Paths.get(filePath))) {
             System.out.println(filePath);
@@ -64,6 +64,7 @@ public class ConvertNameUtil {
             "/**\n" +
             " * \n" +
             " * \n" +
+            " * %s\n" +
             " * %s\n" +
             " * %s\n" +
             " */\n" +
