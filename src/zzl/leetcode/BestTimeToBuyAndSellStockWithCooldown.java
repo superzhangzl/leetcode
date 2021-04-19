@@ -41,6 +41,7 @@ public class BestTimeToBuyAndSellStockWithCooldown {
     public int maxProfit(int[] prices) {
         System.out.println("===");
         for (int i = 1; i <= 3; i++) {
+            // 第一天选择买入或者不买入
             switch (i) {
                 case 1:
                     path.add(1);
@@ -57,9 +58,11 @@ public class BestTimeToBuyAndSellStockWithCooldown {
         return maxProfit;
     }
 
+    // 最大收益
     private int maxProfit = 0;
     // 股票持有状态，当未持有时，不能卖
     private int[] arr = {1, 2, 3};
+    // 打印操作路径，不涉及运算
     LinkedList<Integer> path = new LinkedList<>();
 
     /**
@@ -87,6 +90,10 @@ public class BestTimeToBuyAndSellStockWithCooldown {
                     }
                     // 已经持有就不能再买了
                     if (holdStatus) {
+                        continue;
+                    }
+                    // 最后一天就不要买了
+                    if (depth == prices.length - 1) {
                         continue;
                     }
                     path.add(status);
