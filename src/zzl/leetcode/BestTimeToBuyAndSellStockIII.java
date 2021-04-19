@@ -38,6 +38,10 @@ public class BestTimeToBuyAndSellStockIII {
         prices = GenerateUtil.generateIntArray("4,3");
         maxProfit = new BestTimeToBuyAndSellStockIII().maxProfit(prices);
         Assert.assertEquals(maxProfit, 0);
+        //
+        prices = GenerateUtil.generateIntArray("3,2,6,5,0,3");
+        maxProfit = new BestTimeToBuyAndSellStockIII().maxProfit(prices);
+        Assert.assertEquals(maxProfit, 7);
     }
 
     /**
