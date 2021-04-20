@@ -5,8 +5,10 @@ import zzl.base.annotation.Level;
 import zzl.util.GenerateUtil;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import static zzl.base.enums.Difficulty.*;
+import static zzl.base.enums.Difficulty.HARD;
 
 /**
  * 最长连续序列
@@ -32,13 +34,35 @@ public class LongestConsecutiveSequence {
     }
 
     /**
+     * hash表
+     * 时间复杂度O(n)
+     *
+     * @param nums
+     * @return
+     */
+    public int longestConsecutive(int[] nums) {
+        // stream写法比for-add耗时高一点
+        Set<Integer> numSet = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+        int longestLength = 0;
+        for (Integer num : numSet) {
+            // num的前驱节点num-1如果存在就直接跳过，不存在才进行判断
+            if (!numSet.contains(num - 1)) {
+                int tmp = num;
+                while (numSet.contains(++tmp)) ;
+                longestLength = Math.max(longestLength, tmp - num);
+            }
+        }
+        return longestLength;
+    }
+
+    /**
      * 先排序，然后再用两个变量判断每段序列中最长的那个序列。
      * 时间复杂度: O(nlogn)，不是最高的，但是是最好理解的
      *
      * @param nums
      * @return
      */
-    public int longestConsecutive(int[] nums) {
+    public int longestConsecutive_bad(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
