@@ -58,7 +58,7 @@ public class TargetSum {
      * @param target
      * @return
      */
-    private int fullBagDp(int[] nums, int target) {
+    public int fullBagDp(int[] nums, int target) {
         int len = nums.length;
         int[][] dp = new int[len + 1][target + 1];
         for (int i = 0; i < len + 1; i++) {
