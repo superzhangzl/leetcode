@@ -51,6 +51,13 @@ public class PrintConsoleUtil {
         System.out.println();
     }
 
+    public static void printArray(double[] arrs) {
+        for (int i = 0; i < arrs.length; i++) {
+            System.out.print(String.format("%2.5f ", arrs[i]));
+        }
+        System.out.println();
+    }
+
     public static void printArray(char[][] arrs) {
         for (int i = 0; i < arrs.length; i++) {
             for (int j = 0; j < arrs[0].length; j++) {
@@ -106,5 +113,14 @@ public class PrintConsoleUtil {
             System.out.print(String.format("%2s ", tasks[i]));
         }
         System.out.println();
+    }
+
+    public static void printArray(List<List<String>> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            for (int j = 0; j < tasks.get(i).size(); j++) {
+                System.out.print(String.format("%2s ", tasks.get(i).get(j)));
+            }
+            System.out.println();
+        }
     }
 }

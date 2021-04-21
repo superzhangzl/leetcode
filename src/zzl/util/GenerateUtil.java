@@ -43,6 +43,20 @@ public class GenerateUtil {
         return generateIntArray(input, DEFAULT_SPLIT_CHAR);
     }
 
+    public static double[] generateDoubleArray(String input, String splitChar) {
+        String[] split = input.split(splitChar);
+        int length = split.length;
+        double[] result = new double[length];
+        for (int i = 0; i < length; i++) {
+            result[i] = Double.parseDouble(split[i].trim());
+        }
+        return result;
+    }
+
+    public static double[] generateDoubleArray(String input) {
+        return generateDoubleArray(input, DEFAULT_SPLIT_CHAR);
+    }
+
     public static char[] generateCharArray(String input, String splitChar) {
         String[] split = input.split(splitChar);
         int length = split.length;
@@ -225,5 +239,26 @@ public class GenerateUtil {
         ListNode listNode = generateListNode("-1->5->3->4->0");
         PrintConsoleUtil.printListNode(listNode);
         PrintConsoleUtil.printListNode(reverseListNode(listNode));
+    }
+
+    public static List<List<String>> generateStringIntList(String s) {
+        String replace = s.trim()
+                .substring(1, s.trim().length() - 1);
+        List<List<String>> list = new ArrayList<>();
+        // 按照正则表达式分割
+        String[] lineSplit = replace.split("(?<=\\]),(?=\\[)");
+        for (String line : lineSplit) {
+            // 分割后的每一节都包含"[]"，所以从起始向里位移一位裁剪
+            String tmp = line.substring(1, line.length() - 1);
+            List<String> ll = new ArrayList<>();
+            if (tmp.length() != 0) {
+                String[] split = tmp.split(DEFAULT_SPLIT_CHAR);
+                for (int i = 0; i < split.length; i++) {
+                    ll.add(split[i].replaceAll("\"", "").replace("'", ""));
+                }
+            }
+            list.add(ll);
+        }
+        return list;
     }
 }
