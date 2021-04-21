@@ -3,9 +3,7 @@ package zzl.leetcode;
 import zzl.base.annotation.Level;
 import zzl.util.SpecialAssertUtil;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static zzl.base.enums.Difficulty.MEDIUM;
 
@@ -26,17 +24,65 @@ public class FindAllAnagramsInAString {
         //
         anagrams = new FindAllAnagramsInAString().findAnagrams("abab", "ab");
         SpecialAssertUtil.assertIntListContain(anagrams, Arrays.asList(0, 1, 2));
+        //
+        anagrams = new FindAllAnagramsInAString().findAnagrams("baa", "aa");
+        SpecialAssertUtil.assertIntListContain(anagrams, Arrays.asList(1));
+    }
+
+    /**
+     * 滑动窗口
+     *
+     * @param s
+     * @param p
+     * @return
+     * @see PermutationInString#checkInclusion(String, String)
+     */
+    public List<Integer> findAnagrams(String s, String p) {
+        Map<Character, Integer> need = new HashMap<>();
+        Map<Character, Integer> window = new HashMap<>();
+        for (char c : p.toCharArray()) {
+            need.put(c, need.getOrDefault(c, 0) + 1);
+        }
+        int left = 0;
+        int right = 0;
+        int valid = 0;
+        List<Integer> res = new LinkedList<>();
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            right++;
+            if (need.containsKey(c)) {
+                window.put(c, window.getOrDefault(c, 0) + 1);
+                if (need.get(c).equals(window.get(c))) {
+                    valid++;
+                }
+            }
+            while (right - left >= p.length()) {
+                // 判断合法
+                if (valid == need.size()) {
+                    res.add(left);
+                }
+                char d = s.charAt(left);
+                left++;
+                if (need.containsKey(d)) {
+                    if (need.get(d).equals(window.get(d))) {
+                        valid--;
+                    }
+                    window.put(d, window.getOrDefault(d, 0) - 1);
+                }
+            }
+        }
+        return res;
     }
 
     /**
      * 常规的滑动窗口，每次比较滑动窗口内的值的是否匹配
-     * TODO：每次判断会导致时间复杂度多O(len(26))，需要更巧妙的办法降低时间复杂度
+     * 时间复杂度较高
      *
      * @param s
      * @param p
      * @return
      */
-    public List<Integer> findAnagrams(String s, String p) {
+    public List<Integer> findAnagrams_bad(String s, String p) {
         int leftIndex = 0;
         int rightIndex = p.length();
         List<Integer> res = new LinkedList<>();
