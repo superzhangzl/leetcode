@@ -7,26 +7,59 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * 解码方法@link {https://leetcode-cn.com/problems/decode-ways/}
+ * 解码方法
  *
  * @author zzl
+ * @link {https://leetcode-cn.com/problems/decode-ways/}
  */
 public class DecodeWays {
     public static void main(String[] args) {
         Assert.assertEquals(new DecodeWays().numDecodings("1222"), 5);
-//        Assert.assertEquals(new DecodeWays().numDecodings("12"), 2);
-//        Assert.assertEquals(new DecodeWays().numDecodings("226"), 3);
-//        Assert.assertEquals(new DecodeWays().numDecodings("227"), 2);
-//        Assert.assertEquals(new DecodeWays().numDecodings("0"), 0);
-//        Assert.assertEquals(new DecodeWays().numDecodings("10"), 1);
-//        Assert.assertEquals(new DecodeWays().numDecodings("01"), 0);
-//        Assert.assertEquals(new DecodeWays().numDecodings("100"), 0);
-//        Assert.assertEquals(new DecodeWays().numDecodings("101"), 1);
-//        Assert.assertEquals(new DecodeWays().numDecodings("110"), 1);
-//        Assert.assertEquals(new DecodeWays().numDecodings("99"), 1);
-//        Assert.assertEquals(new DecodeWays().numDecodings("4757562545844617494555774581341211511296816786586787755257741178599337186486723247528324612117156948"), 589824);
+        Assert.assertEquals(new DecodeWays().numDecodings("12"), 2);
+        Assert.assertEquals(new DecodeWays().numDecodings("226"), 3);
+        Assert.assertEquals(new DecodeWays().numDecodings("227"), 2);
+        Assert.assertEquals(new DecodeWays().numDecodings("0"), 0);
+        Assert.assertEquals(new DecodeWays().numDecodings("10"), 1);
+        Assert.assertEquals(new DecodeWays().numDecodings("01"), 0);
+        Assert.assertEquals(new DecodeWays().numDecodings("100"), 0);
+        Assert.assertEquals(new DecodeWays().numDecodings("101"), 1);
+        Assert.assertEquals(new DecodeWays().numDecodings("110"), 1);
+        Assert.assertEquals(new DecodeWays().numDecodings("99"), 1);
+        Assert.assertEquals(new DecodeWays().numDecodings("4757562545844617494555774581341211511296816786586787755257741178599337186486723247528324612117156948"), 589824);
     }
 
+    /**
+     * 动态规划
+     *
+     * @param s
+     * @return
+     * @link {https://leetcode-cn.com/problems/decode-ways/}
+     */
+    public int numDecodings(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        if (s.charAt(0) == '0') {
+            return 0;
+        }
+        int n = s.length();
+        /*
+        dp定义：表示字符串 s 的前 i 个字符 s[1..i] 的解码方法数
+         */
+        int[] dp = new int[n + 1];
+        // 即空字符串可以有 1 种解码方法，解码出一个空字符串。
+        dp[0] = 1;
+        for (int i = 1; i < n + 1; i++) {
+            // 以下两种情况会同时满足，所以是并存的判断关系，会进行累加
+            if (s.charAt(i - 1) != '0') {
+                dp[i] += dp[i - 1];
+            }
+            if (i > 1 && s.charAt(i - 2) != '0' && ((s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0') <= 26)) {
+                dp[i] += dp[i - 2];
+            }
+        }
+        return dp[n];
+    }
 
     /**
      * 个人感觉这个题型和小青蛙跳台阶类似，一次可以跳一个或者跳两个，问到多少级需要跳多少次
@@ -35,7 +68,7 @@ public class DecodeWays {
      * @return
      * @link {https://leetcode-cn.com/problems/decode-ways/solution/dong-tai-gui-hua-ting-jian-dan-de-a-by-cai-liao-xi/}
      */
-    public int numDecodings(String s) {
+    public int numDecodings2(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
