@@ -100,4 +100,11 @@ public class PrintConsoleUtil {
         }
         System.out.println(map);
     }
+
+    public static void printArray(char[] tasks) {
+        for (int i = 0; i < tasks.length; i++) {
+            System.out.print(String.format("%2s ", tasks[i]));
+        }
+        System.out.println();
+    }
 }

@@ -40,13 +40,24 @@ public class GenerateUtil {
     }
 
     public static int[] generateIntArray(String input) {
-        String[] split = input.split(DEFAULT_SPLIT_CHAR);
+        return generateIntArray(input, DEFAULT_SPLIT_CHAR);
+    }
+
+    public static char[] generateCharArray(String input, String splitChar) {
+        String[] split = input.split(splitChar);
         int length = split.length;
-        int[] result = new int[length];
+        char[] result = new char[length];
         for (int i = 0; i < length; i++) {
-            result[i] = Integer.parseInt(split[i].trim());
+            result[i] = split[i].trim()
+                    .replaceAll("\"", "")
+                    .replaceAll("'", "")
+                    .charAt(0);
         }
         return result;
+    }
+
+    public static char[] generateCharArray(String input) {
+        return generateCharArray(beautyInputString(input), DEFAULT_SPLIT_CHAR);
     }
 
     public static int[][] generateBinaryIntArrayBetter(String s) {
