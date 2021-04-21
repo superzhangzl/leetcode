@@ -19,7 +19,7 @@ public class ConvertNameUtil {
      * @param args
      */
     public static void main(String[] args) throws IOException {
-        String url = "https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/";
+        String url = "https://leetcode-cn.com/problems/decode-string/";
         String replace = url.replace("https://leetcode-cn.com/problems/", "");
         String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
