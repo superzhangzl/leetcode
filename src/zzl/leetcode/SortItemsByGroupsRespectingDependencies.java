@@ -1,9 +1,12 @@
 package zzl.leetcode;
 
+import zzl.base.annotation.Level;
 import zzl.util.GenerateUtil;
 import zzl.util.PrintConsoleUtil;
 
 import java.util.*;
+
+import static zzl.base.enums.Difficulty.HARD;
 
 /**
  * 项目管理
@@ -11,6 +14,7 @@ import java.util.*;
  * @author zzl
  * @link {https://leetcode-cn.com/problems/sort-items-by-groups-respecting-dependencies/}
  */
+@Level(HARD)
 public class SortItemsByGroupsRespectingDependencies {
 
     public static void main(String[] args) {
@@ -30,11 +34,17 @@ public class SortItemsByGroupsRespectingDependencies {
     }
 
     /**
-     * 1. 小组所负责的项目如果没有依赖关系，则排序随意
-     * 2. 小组所负责的项目如果有依赖关系，则对应的小组也应该有依赖关系
-     * 3. 小组之间的项目存在相互依赖关系，则认为无法满足
-     *
-     * TODO：补充注释，重点理解拓扑排序问题
+     * 拓扑排序：
+     * 第一优先级：组相同的必须排在一起
+     * 第二优先级：项目的先后顺序必须要满足拓扑排序
+     * <p>
+     * 思路：
+     * 1. 先按照组进行拓扑排序
+     * 2. 再按照项目进行拓扑排序
+     * 3. 得出组合项目之间的对应关系
+     * 4. 将组的拓扑排序中的“组”，按照项目的拓扑顺序进行替换
+     * <p>
+     * 参考：链接中视频分析
      *
      * @param n           项目个数
      * @param m           小组个数
@@ -44,9 +54,10 @@ public class SortItemsByGroupsRespectingDependencies {
      * @link {https://leetcode-cn.com/problems/sort-items-by-groups-respecting-dependencies/solution/1203-xiang-mu-guan-li-by-leetcode-t63b/}
      */
     public int[] sortItems(int n, int m, int[] group, List<List<Integer>> beforeItems) {
-        // 第 1 步：数据预处理，给没有归属于一个组的项目编上组号
+        // 第 1 步：数据预处理，给没有归属于一个组的项目编上组号，防止所有的-1被分到一个组里
         for (int i = 0; i < group.length; i++) {
             if (group[i] == -1) {
+                // m为组数上限，直接赋值自增即可
                 group[i] = m;
                 m++;
             }
@@ -71,6 +82,7 @@ public class SortItemsByGroupsRespectingDependencies {
             int currentGroup = group[i];
             for (int beforeItem : beforeItems.get(i)) {
                 int beforeGroup = group[beforeItem];
+                // 根据项目的前驱关系构造对应的组的关系
                 if (beforeGroup != currentGroup) {
                     groupAdj[beforeGroup].add(currentGroup);
                     groupsIndegree[currentGroup]++;
