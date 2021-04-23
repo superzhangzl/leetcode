@@ -127,6 +127,15 @@ public class GenerateUtil {
         return result;
     }
 
+    public static int[][] generateBinaryIntNotStableLength(String input) {
+        List<List<Integer>> list = generateBinaryIntList(input);
+        int[][] res = new int[list.size()][];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = list.get(i).stream().mapToInt(Integer::intValue).toArray();
+        }
+        return res;
+    }
+
     public static int[][] generateBinaryIntArray(String input) {
         return generateBinaryIntArray(input, DEFAULT_SPLIT_CHAR);
     }
