@@ -19,7 +19,7 @@ public class ConvertNameUtil {
      * @param args
      */
     public static void main(String[] args) throws IOException {
-        String url = "https://leetcode-cn.com/problems/minimum-cost-to-merge-stones/";
+        String url = "https://leetcode-cn.com/problems/keys-and-rooms/";
         String replace = url.replace("https://leetcode-cn.com/problems/", "");
         String title = replace.substring(0, replace.length() - 1);
         String[] split = title.split("-");
@@ -52,7 +52,7 @@ public class ConvertNameUtil {
     /**
      * leetcode文件目录
      */
-    private static String LEETCODE_DIR = "C:\\Users\\z30003077\\IdeaProjects\\leetcode\\src\\zzl\\leetcode";
+    private static String LEETCODE_DIR =System.getProperty("user.dir")+ "\\src\\zzl\\leetcode";
 
     /**
      * java文件模板
