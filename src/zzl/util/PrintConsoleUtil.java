@@ -43,7 +43,7 @@ public class PrintConsoleUtil {
 
     public static void printArray(int[][] arrs) {
         for (int i = 0; i < arrs.length; i++) {
-            for (int j = 0; j < arrs[0].length; j++) {
+            for (int j = 0; j < arrs[i].length; j++) {
                 System.out.print(String.format("%2d ", arrs[i][j]));
             }
             System.out.println();
@@ -60,7 +60,7 @@ public class PrintConsoleUtil {
 
     public static void printArray(char[][] arrs) {
         for (int i = 0; i < arrs.length; i++) {
-            for (int j = 0; j < arrs[0].length; j++) {
+            for (int j = 0; j < arrs[i].length; j++) {
                 System.out.print(String.format("%2s ", arrs[i][j]));
             }
             System.out.println();

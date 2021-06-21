@@ -1,10 +1,13 @@
 package zzl.leetcode;
 
 import org.junit.Assert;
+import zzl.base.annotation.Level;
 import zzl.util.PrintConsoleUtil;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
+
+import static zzl.base.enums.Difficulty.MEDIUM;
 
 /**
  * 课程表
@@ -13,12 +16,56 @@ import java.util.Queue;
  * @link {https://leetcode-cn.com/problems/course-schedule/}
  * @link {https://zhuanlan.zhihu.com/p/56024487}
  */
+@Level(MEDIUM)
 public class CourseSchedule {
     public static void main(String[] args) {
         // 起始点为0
         Assert.assertEquals(new CourseSchedule().canFinish(6, new int[][]{{0, 1}, {1, 2}, {1, 4}, {2, 3}, {2, 4}, {3, 5}, {4, 5}}), true);
         Assert.assertEquals(new CourseSchedule().canFinish(2, new int[][]{{1, 0}}), true);
         Assert.assertEquals(new CourseSchedule().canFinish(2, new int[][]{{1, 0}, {0, 1}}), false);
+    }
+
+    /**
+     * [1, 0]表示要学习1，必须先学习0，即有向图表示为: 0->1
+     *
+     * @param numCourses
+     * @param prerequisites
+     * @return
+     */
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        // 入度表
+        int[] inDegrees = new int[numCourses];
+        for (int[] prerequisite : prerequisites) {
+            // [0]表示当前节点的入度+1
+            inDegrees[prerequisite[0]]++;
+        }
+        Queue<Integer> queue = new ArrayDeque<>();
+        for (int i = 0; i < inDegrees.length; i++) {
+            if (inDegrees[i] == 0) {
+                // 将入度为0的节点编号放入队列
+                queue.add(i);
+            }
+        }
+        while (!queue.isEmpty()) {
+            // 节点标号
+            Integer poll = queue.poll();
+            numCourses--;
+            for (int[] prerequisite : prerequisites) {
+                // 当前节点已经入度为0了才会进到队列中
+                // 当前节点作为源节点，减少以该节点为出发节点时目的节点的入度
+                // 当目的节点的入度为0了以后，那就把它也入到队列中
+                if (prerequisite[1] == poll) {
+                    // 断开一条进来的编号
+                    inDegrees[prerequisite[0]]--;
+                    // 断完以后发现该节点入度为0
+                    if (inDegrees[prerequisite[0]] == 0) {
+                        // 将该节点放进队列
+                        queue.add(prerequisite[0]);
+                    }
+                }
+            }
+        }
+        return numCourses == 0;
     }
 
     /**
@@ -37,7 +84,7 @@ public class CourseSchedule {
      * @return
      * @link {https://leetcode-cn.com/problems/course-schedule/solution/course-schedule-tuo-bu-pai-xu-bfsdfsliang-chong-fa/}
      */
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
+    public boolean canFinish_back(int numCourses, int[][] prerequisites) {
         // 入度表，记录从这个点出发的边的个数
         int[] indegrees = new int[numCourses];
         for (int[] cp : prerequisites) {
